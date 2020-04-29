@@ -1,0 +1,31 @@
+{
+  "name": "swear-jar",
+  "version": "1.0.0",
+  "description": "a good place to swear",
+  "main": "./src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./src/server.js"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [],
+  "author": "liz andry",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lizandry/final-project/issues"
+  },
+  "homepage": "https://github.com/lizandry/final-project#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-openid-connect": "^1.0.1",
+    "https": "^1.0.0",
+    "mkcert": "^1.2.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.3",
+    "path": "^0.12.7",
+    "pg-promise": "^10.5.1"
+  }
+}

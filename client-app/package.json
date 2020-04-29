@@ -1,0 +1,27 @@
+{
+  "name": "swear-jar-front-end",
+  "version": "0.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lizandry/final-project.git"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "build": "webpack -p",
+    "start": "webpack-dev-server -d --content-base ./public"
+  },
+  "proxy": "http://localhost:3000/",
+  "dependencies": {
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.6",
+    "antd": "^4.1.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "ts-loader": "^6.2.2",
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  }
+}
