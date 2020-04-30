@@ -18,7 +18,7 @@ module.exports = {
         port: 3001,
         proxy: {
             '/api': {
-                target: 'http://localhost:3000',
+                target: 'http://localhost:5000',
                 // TODO https/auth0 integration?
                 secure: false
             }

@@ -5,7 +5,7 @@ const router = require('./index');
 //   });
 
 // huh. this is nothing
-  router.get('/api/users/user', (_unused, res, next) =>
+  router.get('/api/users/', (_unused, res, next) =>
   db
       .getAllUsers()
       .then(res.send('userRoutes works!!'))

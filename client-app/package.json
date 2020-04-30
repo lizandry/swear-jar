@@ -11,7 +11,7 @@
     "build": "webpack -p",
     "start": "webpack-dev-server -d --content-base ./public"
   },
-  "proxy": "http://localhost:3000/",
+  "proxy": "http://localhost:5000/",
   "dependencies": {
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.6",

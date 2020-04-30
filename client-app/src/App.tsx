@@ -1,4 +1,5 @@
 import * as React from 'react';
+import TeamTable from './Components/TeamTable';
 
 interface IProps {
 //   user: object;
@@ -37,12 +38,15 @@ class App extends React.Component {
 
         return (
             <div className='App'>
+                hi
+                <TeamTable
+                    // data=
+                />
                 {/* <SampleElem
                     userID={this.state.user}
                 >
                 
                 </SampleElem>*/}
-                hi
             </div>
         )
     }
