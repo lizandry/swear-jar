@@ -1,9 +1,9 @@
 const pgPromise = require('pg-promise');
 const pgp = pgPromise({});
-const db = pgp('postgres://postgres@localhost:5432/swear-jar');
 
-class Admin {
+class Database {
     constructor() {
+        this.db = pgp('postgres://postgres@localhost:5432/swear-jar');
     }
         
     getAllUsers(){
@@ -18,7 +18,7 @@ class Admin {
     }
 
 
-    // REFACTOR can i make some of these calls less ugly?
+    // REFACTOR sequelize or move some of these sql strings into entities
 // TODO if the user is on multiple teams, the commented-out code creates dupes
         // NOTE this is also in user.js
     getUser(params) {
@@ -79,6 +79,24 @@ class Admin {
             `, params
             );
         }
+        addSwearToUser() {
+
+        }
+
+        userCreate() {
+
+
+        }
+        userDelete() {
+        
+        }
+        
+        userLogin(email, password, callback) {
+        
+        }
+        userLogout() {
+        
+        }
         // TODO this should be a call for a separate component
             // t.id, 
             // t.swear,
@@ -94,8 +112,40 @@ class Admin {
         
 
 }
-
+// function login(email, password, callback) {
+//     //this example uses the "pg" library
+//     //more info here: https://github.com/brianc/node-postgres
+  
+//     const bcrypt = require('bcrypt');
+//     const postgres = require('pg');
+  
+//     const conString = 'postgres://user:pass@localhost/mydb';
+//     postgres.connect(conString, function (err, client, done) {
+//       if (err) return callback(err);
+  
+//       const query = 'SELECT id, nickname, email, password FROM users WHERE email = $1';
+//       client.query(query, [email], function (err, result) {
+//         // NOTE: always call `done()` here to close
+//         // the connection to the database
+//         done();
+  
+//         if (err || result.rows.length === 0) return callback(err || new WrongUsernameOrPasswordError(email));
+  
+//         const user = result.rows[0];
+  
+//         bcrypt.compare(password, user.password, function (err, isValid) {
+//           if (err || !isValid) return callback(err || new WrongUsernameOrPasswordError(email));
+  
+//           return callback(null, {
+//             user_id: user.id,
+//             nickname: user.nickname,
+//             email: user.email
+//           });
+//         });
+//       });
+//     });
+//   }
 
   
 
-module.exports = Admin;
+module.exports = Database;
