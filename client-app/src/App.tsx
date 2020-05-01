@@ -20,10 +20,13 @@ class App extends React.Component {
     constructor(props: object) {
         super(props);
         this.state = {
-            user: 0,
+            // user: 0,
+            user: 1,
             loggedIn: false
         };
     }
+
+// IN PROGRESS let's hardcode user 1 for now, and get the table to map their teams
 
     componentDidMount() {
 

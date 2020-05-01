@@ -7,12 +7,12 @@ class Database {
     }
         
     getAllUsers(){
-        return db.any(
+        return this.db.any(
             `SELECT * FROM users`
             );
     }
     getAllTeams(){
-        return db.any(
+        return this.db.any(
             `SELECT * FROM teams`
             );
     }
@@ -20,10 +20,9 @@ class Database {
 
     // REFACTOR sequelize or move some of these sql strings into entities
 // TODO if the user is on multiple teams, the commented-out code creates dupes
-        // NOTE this is also in user.js
     getUser(params) {
 
-        return db.any(
+        return this.db.any(
             // `SELECT 
             //     u.id,
             //     u.username,
@@ -45,23 +44,25 @@ class Database {
             params
         );
     }
-        // NOTE this is also in user.js
+    
     getUserTeams(params) {
-        `SELECT
-            ut.team_id,
-            ut.per_swear
-        FROM users_to_teams ut
-        JOIN users u
-        ON ut.user_id = u.id
-        WHERE ut.user_id = $1
-        `, params
+        return this.db.any(
+            `SELECT
+                ut.team_id,
+                ut.per_swear
+            FROM users_to_teams ut
+            JOIN users u
+            ON ut.user_id = u.id
+            WHERE ut.user_id = $1
+            `, params
+            );
     }
     
         // REFACTOR user_id in swears table probably isn't necessary
         // NOTE this is also in team.js
         // this one is basically done!!
     getTeam(params) {
-        return db.any(
+        return this.db.any(
             `SELECT 
                 u.id,
                 u.username,
