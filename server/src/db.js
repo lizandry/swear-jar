@@ -112,6 +112,7 @@ class Database {
         
 
 }
+// TODO configure bcrypt and jwt, i think?
 // function login(email, password, callback) {
 //     //this example uses the "pg" library
 //     //more info here: https://github.com/brianc/node-postgres

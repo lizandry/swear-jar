@@ -19,6 +19,7 @@
   "homepage": "https://github.com/lizandry/final-project#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
+    "ejs": "^3.1.2",
     "express": "^4.17.1",
     "express-openid-connect": "^1.0.1",
     "https": "^1.0.0",
