@@ -41,7 +41,7 @@ router.get('/', function (req, res) {
 // db.getAllUsers()
 // );
 
-app.get('/api/users/:user', (req, res, next) =>
+router.get('/api/users/:user', (req, res, next) =>
     db
         .getUser(req.params.id)
         .then(user=>res.send(user))
@@ -49,14 +49,14 @@ app.get('/api/users/:user', (req, res, next) =>
 );
 
 // 
-app.get('/api/users/:userTeams', (req, res, next) =>
+router.get('/api/users/:userTeams', (req, res, next) =>
     db
         .getUserTeams(req.params.id)
         .then(teams=>res.send(teams))
         .catch(next)
 );
 
-app.get('/api/teams/:team', (req, res, next) =>
+router.get('/api/teams/:team', (req, res, next) =>
     db
         .getTeam(req.params.team)
         .then(team=>res.send(team))

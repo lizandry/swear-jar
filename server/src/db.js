@@ -22,7 +22,8 @@ class Database {
 // TODO if the user is on multiple teams, the commented-out code creates dupes
     getUser(params) {
 
-        return this.db.any(
+        return this.db.one(
+           
             // `SELECT 
             //     u.id,
             //     u.username,
@@ -45,15 +46,33 @@ class Database {
         );
     }
     
-    getUserTeams(params) {
+    getUserTeams(params =1) {
         return this.db.any(
-            `SELECT
+            console.log('params', params)
+            // `SELECT
+            //     ut.team_id,
+            //     ut.per_swear
+            // FROM users_to_teams ut
+            // JOIN users u
+            // ON ut.user_id = u.id
+            // WHERE ut.user_id = $1
+            // `, params
+            `SELECT 
+            u.temp_total_swears,
                 ut.team_id,
-                ut.per_swear
-            FROM users_to_teams ut
-            JOIN users u
-            ON ut.user_id = u.id
-            WHERE ut.user_id = $1
+                ut.per_swear,
+                t.id,
+                t.swear,
+                t.team_name,
+                t.pledge_url,
+                t.end_date,
+                t.owner
+                FROM users u
+                JOIN users_to_teams ut
+                ON u.id = ut.user_id
+                JOIN teams t
+                ON ut.team_id = t.id
+                WHERE u.id = $1
             `, params
             );
     }
