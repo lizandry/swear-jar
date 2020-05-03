@@ -61,6 +61,24 @@ export function fetchTeam(params) {
       }
     });
   }
+
+//   REFACTOR this will end up being /users/user/teams i think
+  export function fetchUserTeams(params) {
+    return fetch(`/api/users/user/${params}`, {
+        // return fetch(`/api/users/${params}`, {
+        headers: {
+            Accept: "application/json"
+        },
+    }).then(resp => {
+      if (resp.ok) {
+        return resp.json();
+      } else {
+        throw new Error(
+          `oops!! fetch('/api/users/user/${params}') failed: Express server responded with HTTP ${resp.status} ${resp.statusText}`
+        );
+      }
+    });
+  }
 // REFACTOR this is nothing, but i'm having an idea about making the app load faster by fully populating state before/when the component mounts
 //   export function fetchUserState(params) {
 //       let user = fetchUser(params);

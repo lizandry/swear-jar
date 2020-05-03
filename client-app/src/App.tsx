@@ -1,11 +1,10 @@
 import * as React from 'react';
 import TeamTable from './Components/TeamTable';
-import { fetchUser } from './helpers/api-fetchers';
+import { fetchUser, fetchUserTeams } from './helpers/api-fetchers';
 
 //
 // REFACTOR move these things into "Interfaces" folder
 //
-
 // TODO user table joined 
 interface IUser {
     id: number;
@@ -28,7 +27,8 @@ interface ITeam {
 
   interface IState {
     user: number;
-    userObject: IUser[];
+    // userObject: IUser;
+    userObject: object;
     loggedIn: boolean;
     teams: ITeam[];
   }
@@ -44,19 +44,22 @@ class App extends React.Component<IProps, IState> {
         this.state = {
             // user: 0,
             user: 1,
-            userObject: [],
+            userObject: {},
             loggedIn: false,
             teams: []
         };
     }
 
 // IN PROGRESS let's hardcode user 1 for now, and get the table to map their teams
-
+// TODO else statement for login prompt
     componentDidMount() {
         if (this.state.user !== 0) {
             fetchUser(this.state.user)
-                .then(userObject => this.setState(userObject))
-        }
+                .then(userObject => this.setState({userObject}))
+            // fetchUserTeams(this.state.user)
+            //     .then(teams => this.setState({teams}))
+        } else return;
+
     }
 
 
@@ -65,7 +68,7 @@ class App extends React.Component<IProps, IState> {
 
     
     render() {
-{console.log('state check!!', this.state.user)}
+{console.log('state check!!', this.state)}
         return (
             <div className='App'>
                 hi

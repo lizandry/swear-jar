@@ -28,12 +28,12 @@ router.get('/', function (req, res) {
       .catch(next)
   );
 //   // REFACTOR probably don't need this
-  router.get('/api/teams', (_unused, res, next) =>
-  db
-      .getAllTeams()
-      .then((teams) => res.send(teams))
-      .catch(next)
-  );
+//   router.get('/api/teams', (_unused, res, next) =>
+//   db
+//       .getAllTeams()
+//       .then((teams) => res.send(teams))
+//       .catch(next)
+//   );
 
 
   // TODO set up user login  here
@@ -43,13 +43,13 @@ router.get('/', function (req, res) {
 
 router.get('/api/users/:user', (req, res, next) =>
     db
-        .getUser(req.params.id)
+        .getUser(req.params.user)
         .then(user=>res.send(user))
         .catch(next)
 );
 
 // 
-router.get('/api/users/:userTeams', (req, res, next) =>
+router.get('/api/users/user/:userTeams', (req, res, next) =>
     db
         .getUserTeams(req.params.id)
         .then(teams=>res.send(teams))
@@ -58,8 +58,8 @@ router.get('/api/users/:userTeams', (req, res, next) =>
 
 router.get('/api/teams/:team', (req, res, next) =>
     db
-        .getTeam(req.params.team)
-        .then(team=>res.send(team))
+        // .getTeam(req.params.team)
+        // .then(team=>res.send(team))
         // .then(console.log('req.params', req.params))
         .catch(next)
 );

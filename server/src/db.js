@@ -21,7 +21,6 @@ class Database {
     // REFACTOR sequelize or move some of these sql strings into entities
 // TODO if the user is on multiple teams, the commented-out code creates dupes
     getUser(params) {
-
         return this.db.one(
            
             // `SELECT 
@@ -39,16 +38,21 @@ class Database {
             //     ON ut.team_id = t.id
             //     WHERE u.id = $1
             // `, params
-
-            `SELECT * FROM users u 
+            `SELECT
+            u.id,
+            u.username,
+            u.email,
+            u.identify_as,
+            u.temp_total_swears 
+            FROM users u 
             WHERE u.id = $1`, 
             params
+            // `SELECT * FROM users u 
         );
     }
     
-    getUserTeams(params =1) {
+    getUserTeams(params) {
         return this.db.any(
-            console.log('params', params)
             // `SELECT
             //     ut.team_id,
             //     ut.per_swear
