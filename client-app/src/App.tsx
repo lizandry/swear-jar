@@ -55,9 +55,8 @@ class App extends React.Component<IProps, IState> {
     componentDidMount() {
         if (this.state.user !== 0) {
             fetchUser(this.state.user)
-                .then(userObject => this.setState({userObject}))
-            // fetchUserTeams(this.state.user)
-            //     .then(teams => this.setState({teams}))
+                .then(data => this.setState(
+                    {userObject: data[0], teams: data[1]}))
         } else return;
 
     }
