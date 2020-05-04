@@ -30,6 +30,7 @@ export function fetchAllUsers() {
     });
   }
 
+//   COMPLETE!!
 export function fetchUser(params: number) {
     return fetch(`/api/users/${params}`, {
         headers: {
@@ -46,7 +47,7 @@ export function fetchUser(params: number) {
     });
   }
 
-
+// COMPLETE!!
 export function fetchTeam(params: number) {
     return fetch(`/api/teams/${params}`, {
         headers: {

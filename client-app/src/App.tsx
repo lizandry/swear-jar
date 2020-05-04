@@ -1,6 +1,6 @@
 import * as React from 'react';
 import UserDashboard from './Components/UserDashboard';
-import { fetchUser } from './helpers/api-fetchers';
+import { fetchUser, fetchTeam } from './helpers/api-fetchers';
 // import 'bootstrap/dist/css/bootstrap.min.css'
 
 //
@@ -62,18 +62,29 @@ class App extends React.Component<IProps, IState> {
         } else return;
 
     }
-
+    
 
     render() {
 // {console.log('state check!!', this.state)}
+
+
         return (
             <div className='App'>
                 hi
-                    
+  
                 <UserDashboard
                     teams={this.state.teams}
+                    action={fetchTeam}
                 >
                 </UserDashboard>
+{/* {this.state.teams.map(team => {
+
+    <UserDashboard
+    teams={team}
+    action={fetchTeam}
+    >
+                </UserDashboard>
+})} */}
             </div>
         )
     }
