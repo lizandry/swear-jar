@@ -1,6 +1,7 @@
 import * as React from 'react';
 // import { Table, Tag } from 'antd';
-import { Button } from 'reactstrap';
+import { Button, Table } from 'reactstrap';
+// import 'bootstrap/dist/css/bootstrap.min.css'
 // const { Column, ColumnGroup } = Table;
 
 //   NOTE TO SELF thinking about state, the top-level App state should... i think populate an array of team objects
@@ -14,27 +15,28 @@ import { Button } from 'reactstrap';
     email: string;
     temp_total_swears: number; // REFACTOR, join with swears table
   }
-
-//   IN PROGRESS this will be user dashboard, teamtable will be moved down one
+// TODO  pass down getTeam/fetchTeam functions
 const UserDashboard = (props) => {
     const teams = props.teams
-    // this.props.data
+    // IN PROGRESS i'm thinking about trying to do too many things in one component. table header w/team names should be one component, Row should be another component that calls getTeam and maps those. both will be passed up to the table itself
+
     return(
         <div>
+                <Table hover>
+                    <thead>
+                    <tr>
+                    <th>teammate</th>
+                    <th></th>
+                    <th>total swears</th>
+                    <Button>add swear</Button>
+                    </tr>
+                </thead>
 
+                </Table>
 
             {teams.map(team => {
-                <Button 
-                key={team.id}
-                // team={team}
-                >
-                  {/* <Column>
-                  
-                  </Column> */}
                 console.log('team', team)
                 
-               </Button>
-
 })} 
     
         </div>

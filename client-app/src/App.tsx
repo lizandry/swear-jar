@@ -1,6 +1,7 @@
 import * as React from 'react';
 import UserDashboard from './Components/UserDashboard';
 import { fetchUser } from './helpers/api-fetchers';
+// import 'bootstrap/dist/css/bootstrap.min.css'
 
 //
 // REFACTOR move these things into "Interfaces" folder
@@ -45,7 +46,7 @@ class App extends React.Component<IProps, IState> {
             // user: 0,
             user: 1,
             userObject: {},
-            loggedIn: false,
+            loggedIn: true,
             teams: []
         };
     }
