@@ -51,16 +51,9 @@ class Database {
         );
     }
     
+    // COMPLETE!!
     getUserTeams(params) {
         return this.db.any(
-            // `SELECT
-            //     ut.team_id,
-            //     ut.per_swear
-            // FROM users_to_teams ut
-            // JOIN users u
-            // ON ut.user_id = u.id
-            // WHERE ut.user_id = $1
-            // `, params
             `SELECT 
             u.temp_total_swears,
                 ut.team_id,
@@ -82,9 +75,9 @@ class Database {
     }
     
         // REFACTOR user_id in swears table probably isn't necessary
-        // NOTE this is also in team.js
-        // this one is basically done!!
+    // COMPLETE!!
     getTeam(params) {
+        console.log('getTeams', params)
         return this.db.any(
             `SELECT 
                 u.id,
