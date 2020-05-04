@@ -1,6 +1,6 @@
 import * as React from 'react';
-import TeamTable from './Components/TeamTable';
-import { fetchUser, fetchUserTeams } from './helpers/api-fetchers';
+import UserDashboard from './Components/UserDashboard';
+import { fetchUser } from './helpers/api-fetchers';
 
 //
 // REFACTOR move these things into "Interfaces" folder
@@ -55,6 +55,7 @@ class App extends React.Component<IProps, IState> {
     componentDidMount() {
         if (this.state.user !== 0) {
             fetchUser(this.state.user)
+            // REFACTOR this is hardcoded. might not need to be?
                 .then(data => this.setState(
                     {userObject: data[0], teams: data[1]}))
         } else return;
@@ -62,25 +63,16 @@ class App extends React.Component<IProps, IState> {
     }
 
 
-    // TODO if this.state.user === 0, auth0 modal
-    // TODO if this.state.user !== 0, UserDashboard component
-
-    
     render() {
-{console.log('state check!!', this.state)}
+// {console.log('state check!!', this.state)}
         return (
             <div className='App'>
                 hi
-                {this.state.teams.map(team => {
-                    <TeamTable
-                    data={team}
-                    />
-                })}
-                {/* <SampleElem
-                    userID={this.state.user}
-                    >
                     
-                </SampleElem>*/}
+                <UserDashboard
+                    teams={this.state.teams}
+                >
+                </UserDashboard>
             </div>
         )
     }

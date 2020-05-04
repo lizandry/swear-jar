@@ -42,6 +42,7 @@ router.get('/api/users/:user', (req, res, next) =>
     .catch(next)
 )
 
+// REFACTOR idk this could probably use fixing
 router.get('/api/teams/:team', (req, res, next) =>
     db
         .getTeam(req.params.team)
