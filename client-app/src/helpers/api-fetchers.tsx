@@ -48,7 +48,7 @@ export function fetchUser(params: number) {
   }
 
 // COMPLETE!!
-export function fetchTeam(params: number) {
+export function getTeam(params: number) {
     return fetch(`/api/teams/${params}`, {
         headers: {
             Accept: "application/json"
@@ -63,3 +63,23 @@ export function fetchTeam(params: number) {
       }
     });
   }
+
+  export function postTeam(params) {
+    return fetch(`/api/teams/`, {
+        method: 'POST',
+        body: JSON.stringify(params),
+        headers: {
+            Accept: "application/json"
+        },
+    }).then(resp => {
+      if (resp.ok) {
+        return resp.json();
+      } else {
+        throw new Error(
+          `oops!! fetch('/api/teams/${params}') failed: Express server responded with HTTP ${resp.status} ${resp.statusText}`
+        );
+      }
+    });
+  }
+
+  

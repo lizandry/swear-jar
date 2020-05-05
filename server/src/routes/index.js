@@ -51,6 +51,18 @@ router.get('/api/teams/:team', (req, res, next) =>
         .catch(next)
 );
 
+// app.post('/users', (req, res) => {
+   
+//     res.status(200).send(website.addUser(req.body));
+// });
+router.post('/api/teams/', (req, res, next) =>
+    db
+        // .addATeam(req.body)
+        // .then(team=>res.send(team))
+        // // .then(console.log('req.params', req.params))
+        // .catch(next)
+);
+
 // router.use("/admins", require("./admins.route"));
 // router.use("/users", require("./users.route"));
 // router.use("/auth", require("./auth.route"));

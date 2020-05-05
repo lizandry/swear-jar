@@ -77,7 +77,7 @@ class Database {
         // REFACTOR user_id in swears table probably isn't necessary
     // COMPLETE!!
     getTeam(params) {
-        console.log('getTeams', params)
+        console.log('getTeam', params)
         return this.db.any(
             `SELECT 
                 u.id,
@@ -96,6 +96,17 @@ class Database {
             `, params
             );
         }
+
+        addTeam(params) {
+            console.log('addTeam', params)
+            return this.db.none(
+                `INSERT INTO 
+                teams(swear, team_name, pledge_url, end_date, owner)
+                VALUES($1, $2, $3, $4, $5)
+                `, [...params]
+                // TODO is this correct
+                );
+            }
         addSwearToUser() {
 
         }
