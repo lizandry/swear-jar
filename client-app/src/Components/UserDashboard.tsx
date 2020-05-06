@@ -1,3 +1,4 @@
+
 import React, {useEffect, useState} from 'react';
 import CreateTeamButton from './CreateTeamButton'
 import { Table, Tag } from 'antd';
@@ -5,7 +6,6 @@ import { Team } from '../interfaces';
 const { Column, ColumnGroup } = Table;
 
 import 'antd/dist/antd.css';
-
   interface Teammate {
     user_id: number;
     team_id: number;

@@ -75,6 +75,7 @@ class App extends React.Component<{}, AppState> {
 // }
 
 // TODO expand actions
+
         return (
             
             <div className='App'>
@@ -83,13 +84,20 @@ class App extends React.Component<{}, AppState> {
                     action={postTeam}
                 />
 
-
-                hi
                 <UserDashboard
                     teams={this.state.teams}
                     // createTeam={postTeam}
                     action={getTeams}
                 />
+
+{/* {this.state.teams.map(team => {
+
+    <UserDashboard
+    teams={team}
+    action={fetchTeam}
+    >
+                </UserDashboard>
+})} */}
             </div>
         )
     }
