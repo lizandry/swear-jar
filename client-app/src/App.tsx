@@ -1,7 +1,7 @@
 import * as React from 'react';
 import UserDashboard from './Components/UserDashboard';
 import CreateTeamForm from './Components/CreateTeamForm';
-import { fetchUser, getTeam, postTeam } from './helpers/api-fetchers';
+import { fetchUser, getTeams, postTeam } from './helpers/api-fetchers';
 import {AppState, Team, User} from './interfaces'
 
 //
@@ -46,22 +46,22 @@ class App extends React.Component<{}, AppState> {
     constructor(props) {
         super(props);
         this.state = {
-            // user: 0,
-            user: 1,
-            userObject: {},
+            user: {
+                id: 1,
+            },
             loggedIn: true,
-            teams: []
+            teams: [],
         };
     }
 
 // IN PROGRESS let's hardcode user 1 for now, and get the table to map their teams
 // TODO else statement for login prompt
     componentDidMount() {
-        if (this.state.user !== 0) {
-            fetchUser(this.state.user)
+        if (this.state.user.id !== 0) {
+            fetchUser(this.state.user.id)
             // REFACTOR this is hardcoded. might not need to be?
                 .then(data => this.setState(
-                    {userObject: data[0], teams: data[1]}))
+                    {user: data[0], teams: data[1]}))
         } else return;
 
     }
@@ -69,10 +69,10 @@ class App extends React.Component<{}, AppState> {
 
     render() {
 // {console.log('state check!!', this.state)}
-const actions = {
-    getTeam,
-    postTeam
-}
+// const actions = {
+//     getTeam,
+//     postTeam
+// }
 
 // TODO expand actions
         return (
@@ -88,7 +88,7 @@ const actions = {
                 <UserDashboard
                     teams={this.state.teams}
                     // createTeam={postTeam}
-                    action={getTeam}
+                    action={getTeams}
                 />
             </div>
         )

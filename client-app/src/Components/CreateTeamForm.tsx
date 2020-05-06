@@ -1,13 +1,18 @@
 import * as React from 'react';
 import { Form, Input, Button, Select } from 'antd';
 // import {postTeam } from '../helpers/api-fetchers';
+import {AppState, Team, User} from '../interfaces';
 
-class CreateTeamForm extends React.Component<{
-    user:number, 
-    action: Function},
-    {},
-    any
-    > {
+interface Props {
+    user: User;
+    action: Function;
+}
+
+interface State {
+
+}
+
+class CreateTeamForm extends React.Component<Props, State> {
     constructor(props) {
     super(props)
     this.state = {
@@ -25,8 +30,10 @@ async postTeam(event) {
     await fetch('/api/teams/', {
         method: 'POST',
         body: JSON.stringify(
-            this.state, 
-            this.props.user
+            {
+                ...this.state, 
+                owner: this.props.user.id,
+            }
             // team_name: this.state.team_name,
             // swear: this.state.swear,
             // pledge_url: this.state.pledge_url,
@@ -49,14 +56,14 @@ async postTeam(event) {
 
 }
 render() {
-    const{ user, action } = this.props
+    const{ user, action } = this.props;
     return(
         <Form 
         className='create-team'
         name='create-team'
         id='create-team-form'
         labelAlign='left'
-        onFinish={this.postTeam(data)}
+        onFinish={this.postTeam}
 
     >
 
@@ -90,7 +97,7 @@ render() {
         </Button>
 
         <Button
-            // onClick={console.log('call postTeam')}
+            onClick={() => console.log('call postTeam')}
         >
 {/* submit */}
         </Button>
@@ -107,7 +114,7 @@ return(
         name='create-team'
         id='create-team-form'
         labelAlign='left'
-        onFinish={this.postTeam(data)}
+        // onFinish={this.postTeam(data)}
 
     >
 

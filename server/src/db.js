@@ -73,6 +73,28 @@ class Database {
             `, params
             );
     }
+
+    getTeams(params) {
+        console.log('getTeams', params)
+        return this.db.any(
+            `SELECT 
+                t.id AS team_id,
+                u.id AS user_id,
+                u.username,
+                u.email,
+                u.identify_as,
+                u.temp_total_swears,
+                ut.team_id,
+                ut.per_swear
+                from users u
+                JOIN users_to_teams ut
+                ON u.id = ut.user_id
+                JOIN teams t
+                ON ut.team_id = t.id
+                WHERE ut.team_id IN ($1)
+            `, [...params]
+        );
+    }
     
         // REFACTOR user_id in swears table probably isn't necessary
     // COMPLETE!!
@@ -103,7 +125,7 @@ class Database {
                 `INSERT INTO 
                 teams(swear, team_name, pledge_url, end_date, owner)
                 VALUES($1, $2, $3, $4, $5)
-                `, [...params]
+                `, params
                 // TODO is this correct
                 );
             }

@@ -64,6 +64,22 @@ export function getTeam(params: number) {
     });
   }
 
+  export function getTeams(params: number[]) {
+    return fetch(`/api/teams?ids=${params}`, {
+        headers: {
+            Accept: "application/json"
+        },
+    }).then(resp => {
+      if (resp.ok) {
+        return resp.json();
+      } else {
+        throw new Error(
+          `oops!! fetch('/api/teams?ids=${params}') failed: Express server responded with HTTP ${resp.status} ${resp.statusText}`
+        );
+      }
+    });
+  }
+
   export function postTeam(params) {
     return fetch(`/api/teams/`, {
         method: 'POST',

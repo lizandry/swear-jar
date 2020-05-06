@@ -1,5 +1,5 @@
-const UserDashboard = (props) => {
-    const teams = props.teams
+// const UserDashboard = (props) => {
+//     const teams = props.teams
     // const teams = []
     // props.teams
     //     .map(team => props.action(team.team_id)
@@ -9,15 +9,15 @@ const UserDashboard = (props) => {
     
     // })
         // 
-        console.log(team => props.action(team.team_id))
+//         console.log(team => props.action(team.team_id))
     
-    return (
-        <div>
-            {}
+//     return (
+//         <div>
+//             {}
 
-        </div>
-)
-}
+//         </div>
+// )
+// }
         //             {teams.map(team => {
         // props.action(team.team_id).then(members => { 
         //     // <Table dataSource={members}>

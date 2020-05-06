@@ -1,13 +1,13 @@
 export interface AppState {
-    user: number;
-    userObject?: User;
+    user: User;
+    //userObject?: User;
     loggedIn: boolean;
     teams?: Team[]
   }
 
 
 export interface Team {
-    team_id?: number;
+    id?: number;
     swear?: string;
     team_name?: string;
     pledge_url?: string;
@@ -16,7 +16,7 @@ export interface Team {
 }
 
 export interface User {
-    user_id: number;
+    id?: number;
     username?: string; // REFACTOR unnecessary
     email?: string;
     identify_as?: string;
