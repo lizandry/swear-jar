@@ -1,52 +1,13 @@
 import * as React from 'react';
 import UserDashboard from './Components/UserDashboard';
 import CreateTeamForm from './Components/CreateTeamForm';
-import { fetchUser, getTeams, postTeam } from './helpers/api-fetchers';
-import {AppState, Team, User} from './interfaces'
+import { fetchUser, getTeams, getTeam, postTeam } from './helpers/api-fetchers';
+import {AppState, Team, User, Teammate} from './interfaces'
 import 'antd/dist/antd.css';
 // import '@material-ui/core/styles';
 import '@material-ui/core';
-// import { styled } from '@material-ui/core/styles';
 
-//
-// REFACTOR move these things into "Interfaces" folder
-//
-// TODO user table joined 
-// interface IUser {
-//     id: number;
-//     username: string; // REFACTOR unnecessary
-//     email: string;
-//     identify_as: string;
-//     temp_total_swears: number; // REFACTOR join swear table
-// }
-
-// interface ITeam {
-//     id: number;
-//     swear: string;
-//     team_name: string;
-//     pledge_url: string;
-//     // end_date: any; // TODO date object? or just store it as a string
-//     owner: number;
-//   }
-//   interface IProps {
-// }
-
-//   interface IState {
-//     user: number;
-//     // userObject: IUser;
-//     userObject: object;
-//     loggedIn: boolean;
-//     teams: ITeam[];
-//     // teams: any[];
-
-//   }
-
-// TODO auth0 integration
-// TODO write some functions that set user state and then pass "User" class
-// class App extends React.Component<IProps, IState> {
-//     constructor(props: object) {
 class App extends React.Component<{}, AppState> {
-// class App extends React.Component<IProps, IState> {
     constructor(props) {
         super(props);
         this.state = {
@@ -69,16 +30,28 @@ class App extends React.Component<{}, AppState> {
         } else return;
 
     }
+    componentDidUpdate(prevProps, prevState) {
+        // only update chart if the data has changed
+        if (prevState !== this.state) {
+            // if (!this.state.teams) return;
+            // for (i = 0, i < this.state.teams.length, i++) {
+            //     console.log(i)
+            // }
+            // console.log('teams', this.state.teams)
+         
+        }
+      }
     
 
     render() {
 // {console.log('state check!!', this.state)}
-// const actions = {
-//     getTeam,
-//     postTeam
-// }
+// const teamWithTeammates: [Team, Teammate[]] = [,[]]
 
-// TODO expand actions
+// if (!this.state.teams.length) return;
+//     for (team of this.state.teams) {
+//         teamWithTeammates.push(team)
+//     }
+
 
         return (
             
@@ -92,6 +65,7 @@ class App extends React.Component<{}, AppState> {
                     teams={this.state.teams}
                     // createTeam={postTeam}
                     action={getTeams}
+                    getTeam={getTeam}
                 />
 
 {/* {this.state.teams.map(team => {

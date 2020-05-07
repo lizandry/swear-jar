@@ -1,15 +1,18 @@
 
 import React, {useEffect, useState} from 'react';
 import CreateTeamButton from './CreateTeamButton'
+import TeamTable from './TeamTable'
 import { Table, Tag } from 'antd';
-import { Team, Teammate } from '../interfaces';
 const { Column, ColumnGroup } = Table;
-// import 'antd/dist/antd.css';
+import { Team, Teammate } from '../interfaces';
   
 interface Props {
     teams: object[];
     action: Function;
+    getTeam: Function;
 }
+const tables: string[] = []
+
 
 const UserDashboard = (props: Props) => {
     const [teammates, setTeammates] = useState<Teammate[]>();
@@ -21,8 +24,22 @@ const UserDashboard = (props: Props) => {
             ).then(
                 // data => console.log(data)
                 (res: Teammate[]) => setTeammates(res)
-            );
+            )
+            // .then(
+            //     props.teams.map((t: Team) =>{
+            //       tables.push(`<TeamTable
+            //             team=${t.toString}
+            //             teammates=${{teammates}}
+            //       />`)
+
+            //     })
+
+
+            // )
     }, [teams]);
+
+    
+
 
     // if (props.teams.length <= 0) return(
     //     // TODO this will prompt 'create team' button
@@ -84,19 +101,32 @@ const UserDashboard = (props: Props) => {
 
 
         ]
+        return (
+            <div>
+                {console.log('teams', props.teams)}
+                {console.log('teammates', teammates)}
+              {/* {props.teams.map((t: Team) =>{
+                  <TeamTable
+                  team={t}
+                        teammates={teammates}
+                        />
+                        {console.log(props.teams)}
 
-    return <Table 
-                className='team-table'
-                columns={columns} 
-                dataSource={teammates} 
-                showHeader={true}
-                size='small'
-                // title={teammates[0].team_name}
-                // key={teammates.length}
-                >
-                {/* {console.log('teammates', teammates)} */}
-            console.log(teammates)
-            </Table>
+                })} */}
+            </div>
+          );
+    // return <Table 
+    //             className='team-table'
+    //             columns={columns} 
+    //             dataSource={teammates} 
+    //             showHeader={true}
+    //             size='small'
+    //             // title={teammates[0].team_name}
+    //             // key={teammates.length}
+    //             >
+    //             {console.log('tables', tables)}
+    //         console.log(teammates)
+    //         </Table>
     // });
    return(
        <div>
