@@ -8,15 +8,55 @@ import { Team, Teammate } from '../interfaces';
   
 interface Props {
     teams: object[];
+    teamsData: object[];
     action: Function;
     getTeam: Function;
 }
-const tables: string[] = []
+
+interface State {
+    teammates: Teammate[];
+    teams: Team[]
+    teamsData: Team[]
+    
+}
+// class UserDashboard extends React.Component<Props, State> {
+//     constructor(props) {
+//         super(props)
+//         this.state = {
+//             teammates: [],
+//             teams: this.props.teams
+//         }
+//     }
+
+//     componentDidMount() {
+//     }
+//     render() { 
+//         const teams = this.props.teams
+//         let tempTeamMates: Teammate[] = []
+    
+//         // if (teams.length) 
+//         this.props.action(
+//             teams.map((t: Team) => t.id)
+//         ).then(
+//             // data => console.log(data)
+//             (res: Teammate[]) => tempTeamMates = res)
+//         // )
+//     console.log('temp teammates', tempTeamMates)
+//         console.log(this.state)
+//         return(
+//             <div>
+
+
+//             </div>
+
+//         )
+//     }
+// }
 
 
 const UserDashboard = (props: Props) => {
     const [teammates, setTeammates] = useState<Teammate[]>();
-    const teams = props.teams;
+    const teams = props.teamsData;
     useEffect(() => {
             if (!teams.length) return;
             props.action(
@@ -25,17 +65,6 @@ const UserDashboard = (props: Props) => {
                 // data => console.log(data)
                 (res: Teammate[]) => setTeammates(res)
             )
-            // .then(
-            //     props.teams.map((t: Team) =>{
-            //       tables.push(`<TeamTable
-            //             team=${t.toString}
-            //             teammates=${{teammates}}
-            //       />`)
-
-            //     })
-
-
-            // )
     }, [teams]);
 
     
@@ -101,32 +130,20 @@ const UserDashboard = (props: Props) => {
 
 
         ]
-        return (
-            <div>
-                {console.log('teams', props.teams)}
-                {console.log('teammates', teammates)}
-              {/* {props.teams.map((t: Team) =>{
-                  <TeamTable
-                  team={t}
-                        teammates={teammates}
-                        />
-                        {console.log(props.teams)}
 
-                })} */}
-            </div>
-          );
-    // return <Table 
-    //             className='team-table'
-    //             columns={columns} 
-    //             dataSource={teammates} 
-    //             showHeader={true}
-    //             size='small'
-    //             // title={teammates[0].team_name}
-    //             // key={teammates.length}
-    //             >
-    //             {console.log('tables', tables)}
-    //         console.log(teammates)
-    //         </Table>
+
+    return <Table 
+                className='team-table'
+                columns={columns} 
+                dataSource={teammates} 
+                showHeader={true}
+                size='small'
+                // title={teammates[0].team_name}
+                // key={teammates.length}
+                >
+                    {console.log('teamsData',teams)}
+            console.log(teammates)
+            </Table>
     // });
    return(
        <div>

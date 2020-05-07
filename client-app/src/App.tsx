@@ -63,6 +63,7 @@ class App extends React.Component<{}, AppState> {
 
                 <UserDashboard
                     teams={this.state.teams}
+                    teamsData={this.state.teams}
                     // createTeam={postTeam}
                     action={getTeams}
                     getTeam={getTeam}

@@ -79,11 +79,6 @@ class Database {
         return this.db.any(
             `SELECT 
                 t.id AS team_id,
-                t.swear,
-                t.team_name,
-                t.pledge_url,
-                t.end_date,
-                t.owner,
                 u.id AS user_id,
                 u.username,
                 u.email,

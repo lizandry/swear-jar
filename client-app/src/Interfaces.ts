@@ -16,11 +16,6 @@ export interface Team {
 }
 export interface Teammate {
     team_id: number;
-    swear?: string;
-    team_name?: string;
-    pledge_url?: string;
-    end_date?: string; 
-    owner?: number;
     user_id: number;
     username: string
     email: string;
