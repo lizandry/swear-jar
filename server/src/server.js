@@ -37,6 +37,19 @@ const config = {
   clientID: process.env.AUTH0_CLIENT_ID,
   issuerBaseURL: process.env.AUTH0_DOMAIN
 };
+
+//
+//
+// HTTPS bypass attempt
+//
+//
+if (!key) {
+    app.use('/', router);
+
+    app.listen(port, () => console.log(`check out localhost, port ${port}!`));
+} else
+
+
 app.use(auth(config)); 
 
 // TODO figure out what i was trying to do with this this and auth0
@@ -49,11 +62,7 @@ app.use(auth(config));
 //     next(req);
 // });
 
-// TEMP router not working, rolling back code to simplest version of itself to find problem
 app.use('/', router);
-// app.get('/', function (req, res, next) {
-//     res.send('does it work??')
-// });
 
 
 https.createServer({key, cert}, app)
