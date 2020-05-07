@@ -79,12 +79,16 @@ class Database {
         return this.db.any(
             `SELECT 
                 t.id AS team_id,
+                t.swear,
+                t.team_name,
+                t.pledge_url,
+                t.end_date,
+                t.owner,
                 u.id AS user_id,
                 u.username,
                 u.email,
                 u.identify_as,
                 u.temp_total_swears,
-                ut.team_id,
                 ut.per_swear
                 from users u
                 JOIN users_to_teams ut

@@ -3,6 +3,10 @@ import UserDashboard from './Components/UserDashboard';
 import CreateTeamForm from './Components/CreateTeamForm';
 import { fetchUser, getTeams, postTeam } from './helpers/api-fetchers';
 import {AppState, Team, User} from './interfaces'
+import 'antd/dist/antd.css';
+// import '@material-ui/core/styles';
+import '@material-ui/core';
+// import { styled } from '@material-ui/core/styles';
 
 //
 // REFACTOR move these things into "Interfaces" folder

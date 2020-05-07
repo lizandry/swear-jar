@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { Form, Input, Button, Select } from 'antd';
+import { Form, Input, Button, Select, DatePicker } from 'antd';
 // import {postTeam } from '../helpers/api-fetchers';
 import {AppState, Team, User} from '../interfaces';
+// import { styled } from '@material-ui/core/styles';
+// import TextField from '@material-ui/core/TextField';
 
 interface Props {
     user: User;
@@ -9,7 +11,12 @@ interface Props {
 }
 
 interface State {
-
+swear: string;
+team_name: string;
+pledge_url: string;
+end_date: string;
+// owner: User
+owner: number;
 }
 
 class CreateTeamForm extends React.Component<Props, State> {
@@ -19,26 +26,28 @@ class CreateTeamForm extends React.Component<Props, State> {
         swear: '',
         team_name: '',
         pledge_url: '',
-        end_date: ''
+        end_date: '',
+        owner: this.props.user.id
     }
     // user = this.props.user
     this.postTeam = this.postTeam.bind(this);
 }
+// IN PROGRESS: this doesn't do what i want it to do
+onDateChange(date, dateString) {
+    dateString => this.setState({end_date: dateString})
 
+  }
+
+//   IN PROGRESS this IS posting
 async postTeam(event) {
     event.preventDefault();
     await fetch('/api/teams/', {
         method: 'POST',
         body: JSON.stringify(
             {
-                ...this.state, 
-                owner: this.props.user.id,
+                // REFACTOR does this need to be spread?
+                ...this.state
             }
-            // team_name: this.state.team_name,
-            // swear: this.state.swear,
-            // pledge_url: this.state.pledge_url,
-            // end_date: this.state.end_date,
-            // owner: this.props.user
         ),
         headers: {
           'Content-Type': 'application/json charset=UTF-8',
@@ -56,7 +65,9 @@ async postTeam(event) {
 
 }
 render() {
+    // console.log(this.state)
     const{ user, action } = this.props;
+
     return(
         <Form 
         className='create-team'
@@ -67,28 +78,44 @@ render() {
 
     >
 
-        <Input
+        <Form.Item
+            className='create-team-inputs'
+            label='team name'
+            name='team name'
         
         >
-        {/* team name */}
-        </Input>
+            <Input />
+        </Form.Item>
 
-        <Input
+        <Form.Item
+        // TODO look up apostrophe rules
+            className='create-team-inputs'
+            label='what`s your swear?'
+            name='team name'
         
         >
-        {/* swear */}
-        </Input>
+            {/* REFACTOR inline? */}
+            <Input />
+        </Form.Item>
 
-        <Select
+        <Form.Item
+            className='create-team-inputs'
+            label='who do you want to support?'
+            name='crowdfunding campaign'
         
         >
-            {/* this should serve up some campaign urls */}
-        </Select>
+            {/* TODO map api calls to outside urls to this */}
+        {/* TODO event target value will populate the rest of this page with api details */}
+            <Select />
+        </Form.Item>
 
-        <Input
-        
+        <Form.Item
+            className='create-team-inputs'
+            label='team/campaign end date'
+            name='end date'
         >
-        </Input>
+            <DatePicker onChange={this.onDateChange} />
+        </Form.Item>
 
         <Button
         
@@ -97,64 +124,65 @@ render() {
         </Button>
 
         <Button
-            onClick={() => console.log('call postTeam')}
+            type="primary" 
+            htmlType="submit"
         >
-{/* submit */}
+            submit team
         </Button>
     </Form>
     )
 }
 }
 
-const CreateSomething = (props) => {
+// const CreateSomething = (props) => {
     
-return(
-    <Form 
-        className='create-team'
-        name='create-team'
-        id='create-team-form'
-        labelAlign='left'
-        // onFinish={this.postTeam(data)}
+// return(
+//     <Form 
+//         className='create-team'
+//         name='create-team'
+//         id='create-team-form'
+//         labelAlign='left'
+//         // onFinish={this.postTeam(data)}
 
-    >
+//     >
 
-        <Input
+//         <Input
         
-        >
-        {/* team name */}
-        </Input>
+//         >
+//         {/* team name */}
+//         </Input>
 
-        <Input
+//         <Input
         
-        >
-        {/* swear */}
-        </Input>
+//         >
+//         {/* swear */}
+//         </Input>
 
-        <Select
+//         <Select
         
-        >
-            {/* this should serve up some campaign urls */}
-        </Select>
+//         >
+//             {/* this should serve up some campaign urls */}
+//         </Select>
 
-        <Input
+//         <Input
         
-        >
-        </Input>
+//         >
+//         </Input>
 
-        <Button
+//         <Button
         
-        >
-{/* cancel */}
-        </Button>
+//         >
+// {/* cancel */}
+//         </Button>
 
-        <Button
-            // onClick={console.log('call postTeam')}
-        >
-{/* submit */}
-        </Button>
-    </Form>
-)
+//         <Button
+//             // onClick={console.log('call postTeam')}
+//         >
+// {/* submit */}
+//         </Button>
+//     </Form>
+// )
 
-}
+// }
 
 export default CreateTeamForm;

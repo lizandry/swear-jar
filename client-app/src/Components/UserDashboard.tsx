@@ -2,20 +2,16 @@
 import React, {useEffect, useState} from 'react';
 import CreateTeamButton from './CreateTeamButton'
 import { Table, Tag } from 'antd';
-import { Team } from '../interfaces';
+import { Team, Teammate } from '../interfaces';
 const { Column, ColumnGroup } = Table;
+// import 'antd/dist/antd.css';
+  
+interface Props {
+    teams: object[];
+    action: Function;
+}
 
-import 'antd/dist/antd.css';
-  interface Teammate {
-    user_id: number;
-    team_id: number;
-    per_swear: number;
-    username: string; // REFACTOR maybe not necessary
-    identify_as: string;
-    email: string;
-    temp_total_swears: number; // REFACTOR, join with swears table
-  }
-const UserDashboard = (props: {teams: object[], action: Function}) => {
+const UserDashboard = (props: Props) => {
     const [teammates, setTeammates] = useState<Teammate[]>();
     const teams = props.teams;
     useEffect(() => {
@@ -23,7 +19,7 @@ const UserDashboard = (props: {teams: object[], action: Function}) => {
             props.action(
                 props.teams.map((t: Team) => t.id)
             ).then(
-                //data => console.log(data)
+                // data => console.log(data)
                 (res: Teammate[]) => setTeammates(res)
             );
     }, [teams]);
@@ -33,17 +29,74 @@ const UserDashboard = (props: {teams: object[], action: Function}) => {
     //     <div>oops! nothing to see here</div>
     // )
 
+// TODO: a whole bunch of post requests, figuring out how some of ant design's API stuff around columns works
+
     // sort teammates by team ID
     // const table = teammates.map((teammates: Teammate[])=> {
+        const teammateTotal = (count: number, cost: number) => count * cost
+        
+        // TODO these are post requests
+        const addSwear = (count: number) => count++
+        const paidUp = (count: number) => count = 0
         const columns = [
             {
-                title: 'Username',
+                title: 'username',
                 dataIndex: 'username',
                 key: 'username',
             },
+            {
+                title: 'name',
+                dataIndex: 'identify_as',
+            },
+            {
+                title: 'email',
+                dataIndex: 'email',
+                key: 'email',
+            },
+            {
+                title: 'pledge amount',
+                dataIndex: 'per_swear',
+            },
+            {
+                title: 'swear count',
+                dataIndex: 'temp_total_swears',
+                // render: data=> (console.log(data))
+            },
+            {
+                // TODO this is a post request
+                title: 'add swear',
+                dataIndex: 'temp_total_swears',
+            },
+            {
+                title: 'total owed',
+            },
+            {
+                // TODO this is a post request
+                // title: 'paid up?',
+                dataIndex: 'temp_total_swears',
+                // render: <a>paid up?</a>
+            },
+            {
+                // TODO post request /api/teams/team
+                dataIndex: 'user_id',
+                // render: <a>remove</a>
+            },
+
+
         ]
 
-    return <Table dataSource={teammates} columns={columns} />
+    return <Table 
+                className='team-table'
+                columns={columns} 
+                dataSource={teammates} 
+                showHeader={true}
+                size='small'
+                // title={teammates[0].team_name}
+                // key={teammates.length}
+                >
+                {/* {console.log('teammates', teammates)} */}
+            console.log(teammates)
+            </Table>
     // });
    return(
        <div>
