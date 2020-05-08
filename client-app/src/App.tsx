@@ -70,15 +70,6 @@ class App extends React.Component<{}, AppState> {
                     getTeam={getTeam}
                 />
                 
-
-{/* {this.state.teams.map(team => {
-
-    <UserDashboard
-    teams={team}
-    action={fetchTeam}
-    >
-                </UserDashboard>
-})} */}
             </div>
         )
     }

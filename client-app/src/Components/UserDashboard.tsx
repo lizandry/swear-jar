@@ -21,9 +21,9 @@ const UserDashboard = (props: Props) => {
             props.action(
                 props.teams.map((t: Team) => t.id)
             ).then(
-                data => console.log(data)
-                // (res: Teammate[]) => setTeammates(res)
-            )
+                // data => console.log(data)
+                (res: Teammate[]) => setTeammates(res)
+            );
     }, [teams]);
 
     return(
@@ -31,7 +31,7 @@ const UserDashboard = (props: Props) => {
             {props.teams.map(team => {
                 return <TeamTable
                  team={team}
-                //  teammates={teammates}
+                 teammates={teammates}
                  action={props.getTeam}
                  
                  >

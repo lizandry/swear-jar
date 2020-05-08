@@ -25,23 +25,13 @@ const useStyles = makeStyles({
 
 const TeamTable = (props: Props) => {
     const classes = useStyles();
-    // const [teammates, setTeammates] = useState<Teammate[]>();
     const team = props.team;
-    // useEffect(() => {
-    //         if (!teams.length) return;
-    //         props.action(
-    //             props.team.map((t: Team) => t.id)
-    //         ).then(
-    //             // data => console.log(data)
-    //             (res: Teammate[]) => setTeammates(res)
-    //         );
-    // }, [teams]);
-
-
+    
     return <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
  
             <TableHead>
+                {console.log('table head props', props)}
                 <Toolbar>{team.team_name}</Toolbar>
                 <TableRow className='team-table-header'>
           {/* <TableCell>remove user button</TableCell> */}
@@ -53,9 +43,10 @@ const TeamTable = (props: Props) => {
                 <TableCell align="right">swore</TableCell>
             </TableRow>
             </TableHead>
-        
+            {console.log('table props', props)}
             <TableBody>
-          {this.props.teammates.map((row) => (
+        {console.log('table body props', props)}
+          {/* {this.props.teammates.map((row) => (
             <TableRow key={row.name} className='team-table-body'>
               <TableCell component="th" scope="row">
                 {row.name}
@@ -65,8 +56,9 @@ const TeamTable = (props: Props) => {
               <TableCell align="right">{row.carbs}</TableCell>
               <TableCell align="right">{row.protein}</TableCell>
             </TableRow>
-          ))}
-        </TableBody></Table>
+          ))} */}
+        </TableBody>
+        </Table>
     </TableContainer>
 
 
