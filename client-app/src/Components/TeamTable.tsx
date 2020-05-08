@@ -11,9 +11,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
 
 interface Props {
+    children: any[];
     team: Team;
-    teammates: Teammate[]
-    // action: Function;
+    teammates?: Teammate[]
+    action: Function;
 }
 
 const useStyles = makeStyles({

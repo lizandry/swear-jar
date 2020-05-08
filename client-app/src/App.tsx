@@ -1,6 +1,7 @@
 import * as React from 'react';
 import UserDashboard from './Components/UserDashboard';
 import CreateTeamForm from './Components/CreateTeamForm';
+import TeamTable from './Components/TeamTable'
 import { fetchUser, getTeams, getTeam, postTeam } from './helpers/api-fetchers';
 import {AppState, Team, User, Teammate} from './interfaces'
 import 'antd/dist/antd.css';
@@ -68,6 +69,7 @@ class App extends React.Component<{}, AppState> {
                     action={getTeams}
                     getTeam={getTeam}
                 />
+                
 
 {/* {this.state.teams.map(team => {
 
