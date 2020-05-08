@@ -13,7 +13,7 @@ import Paper from '@material-ui/core/Paper';
 interface Props {
     children: any[];
     team: Team;
-    teammates?: Teammate[]
+    teammates: Teammate[]
     action: Function;
 }
 
@@ -26,10 +26,17 @@ const useStyles = makeStyles({
 const TeamTable = (props: Props) => {
     const classes = useStyles();
     const team = props.team;
+    const teammates = props.teammates || [];
+    // const [teammates, setTeammates] = useState<Teammate[]>();
+
+    // useEffect(() => {
+    //         if (!props.teammates === undefined) return;
+    //         teammates => setTeammates(teammates)
+    // }, [props.teammates]);
     
     return <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
- 
+        <Table className={classes.table} aria-label="a dense table">
+        <caption>{team.team_name}</caption>
             <TableHead>
                 {console.log('table head props', props)}
                 <Toolbar>{team.team_name}</Toolbar>
@@ -43,20 +50,18 @@ const TeamTable = (props: Props) => {
                 <TableCell align="right">swore</TableCell>
             </TableRow>
             </TableHead>
-            {console.log('table props', props)}
             <TableBody>
-        {console.log('table body props', props)}
-          {/* {this.props.teammates.map((row) => (
-            <TableRow key={row.name} className='team-table-body'>
+          {teammates.map((teammate) => (
+            <TableRow key={teammate.user_id} className='team-table-body'>
               <TableCell component="th" scope="row">
-                {row.name}
+                {teammate.email}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{teammate.identify_as}</TableCell>
+              <TableCell align="right">${teammate.per_swear}</TableCell>
+              <TableCell align="right">{teammate.temp_total_swears}</TableCell>
+              <TableCell align="right">${(teammate.per_swear * teammate.temp_total_swears)}</TableCell>
             </TableRow>
-          ))} */}
+          ))}
         </TableBody>
         </Table>
     </TableContainer>

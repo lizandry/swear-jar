@@ -13,17 +13,11 @@ const key = fs.readFileSync('./localhost-key.pem');
 const cert = fs.readFileSync('./localhost.pem');
 
 const app = express();
-// app.get('/', function (req, res) {
-//     res.send('hello world!!!!');
-//     });
 
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
-// app.get('/', function (req, res) {
-//     res.send('Hello World!');
-//     });
 
 // REFACTOR put this somewhere tidier
 // user authorization config
@@ -38,19 +32,13 @@ const config = {
   issuerBaseURL: process.env.AUTH0_DOMAIN
 };
 
-//
-//
-// HTTPS bypass attempt
-//
-//
-if (!key) {
-    app.use('/', router);
-
-    app.listen(port, () => console.log(`check out localhost, port ${port}!`));
-} else
-
-
 app.use(auth(config)); 
+app.use('/', router);
+https.createServer({key, cert}, app)
+.listen(port, () => {
+    console.log(`Listening on ${config.baseURL}`);
+});
+
 
 // TODO figure out what i was trying to do with this this and auth0
 // app.use('/', (req, res) => {
@@ -61,14 +49,3 @@ app.use(auth(config));
 //     res.locals.user = req.openid.user;
 //     next(req);
 // });
-
-app.use('/', router);
-
-
-https.createServer({key, cert}, app)
-  .listen(port, () => {
-    console.log(`Listening on ${config.baseURL}`);
-  });
-// app.listen(port, function () {
-//     console.log(`find me on port ${port}!`);
-//     });

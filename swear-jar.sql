@@ -66,7 +66,7 @@ CREATE TABLE public.teams (
     swear text NOT NULL,
     team_name text,
     pledge_url text NOT NULL,
-    end_date date,
+    end_date text,
     owner integer
 );
 
@@ -102,7 +102,7 @@ ALTER SEQUENCE public.teams_id_seq OWNED BY public.teams.id;
 CREATE TABLE public.users (
     id integer NOT NULL,
     username text,
-    email text,
+    email text NOT NULL,
     identify_as text NOT NULL,
     temp_total_swears integer DEFAULT 0
 );
@@ -212,8 +212,9 @@ COPY public.swears (id, users_to_teams_id, user_id, "timestamp", has_paid) FROM 
 --
 
 COPY public.teams (id, swear, team_name, pledge_url, end_date, owner) FROM stdin;
-1	pronouns	street sharks	url here	\N	1
-2	the f word	laser sharks	url here	\N	4
+2	the f word	laser sharks	url2	date	4
+1	pronouns	street sharks	url1	datehere	1
+3	guys	young machetes	url3	a date	8
 \.
 
 
@@ -222,10 +223,17 @@ COPY public.teams (id, swear, team_name, pledge_url, end_date, owner) FROM stdin
 --
 
 COPY public.users (id, username, email, identify_as, temp_total_swears) FROM stdin;
-1	mxlizandry	liz@gmail	liz	0
-2	seymour_butts	sey@microsoft	mr. butts	0
-3	cassie_x	cass@home	cassie	0
-4	james_is_here	james@jamesnet	james	0
+2	seymour_butts	sey@microsoft	mr. butts	8
+6	xquivalentxchange	yoshikagekira@gmail	gappy	10
+10	20thcenturydaddy	jojo@aol.com	joseph	16
+7	lisalisastan89	lisalisafan89@hotmail	jorge	2
+11	beautifulboi	caesar@zeppeli.family	caesar	4
+8	wine_mom	bruabba@gmail	abbacchio	9
+5	xSTEELBALLx	gyro@zeppeli-joestar.net	gyro	7
+9	DeusEx	RobertEO@speedwagon.foundation	speedwagon	7
+1	mxlizandry	liz@gmail	liz	5
+4	james_is_here	james@jamesnet	james	5
+3	cassie_x	cass@home	cassie	3
 \.
 
 
@@ -239,6 +247,16 @@ COPY public.users_to_teams (id, user_id, team_id, per_swear) FROM stdin;
 3	3	1	15
 4	4	2	7
 5	1	2	5
+6	1	3	2
+7	5	1	4
+8	6	1	7
+9	7	3	3
+10	8	3	12
+11	9	3	5
+12	10	1	5
+13	11	2	6
+14	9	1	50
+15	2	2	5
 \.
 
 
@@ -253,21 +271,21 @@ SELECT pg_catalog.setval('public.swears_id_seq', 3, true);
 -- Name: teams_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.teams_id_seq', 2, true);
+SELECT pg_catalog.setval('public.teams_id_seq', 3, true);
 
 
 --
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 4, true);
+SELECT pg_catalog.setval('public.users_id_seq', 11, true);
 
 
 --
 -- Name: users_to_teams_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.users_to_teams_id_seq', 5, true);
+SELECT pg_catalog.setval('public.users_to_teams_id_seq', 15, true);
 
 
 --
@@ -284,6 +302,14 @@ ALTER TABLE ONLY public.swears
 
 ALTER TABLE ONLY public.teams
     ADD CONSTRAINT teams_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_email_key UNIQUE (email);
 
 
 --
