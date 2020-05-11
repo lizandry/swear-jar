@@ -28,7 +28,7 @@ class Database {
             //     u.username,
             //     u.email,
             //     u.identify_as,
-            //     u.temp_total_swears,
+            //     ut.temp_total_swears,
             //     ut.team_id,
             //     ut.per_swear
             //     FROM users u
@@ -42,8 +42,7 @@ class Database {
             u.id,
             u.username,
             u.email,
-            u.identify_as,
-            u.temp_total_swears 
+            u.identify_as
             FROM users u 
             WHERE u.id = $1`, 
             params
@@ -55,7 +54,7 @@ class Database {
     getUserTeams(params) {
         return this.db.any(
             `SELECT 
-            u.temp_total_swears,
+            ut.temp_total_swears,
                 ut.team_id,
                 ut.per_swear,
                 t.id,
@@ -83,7 +82,7 @@ class Database {
                 u.username,
                 u.email,
                 u.identify_as,
-                u.temp_total_swears,
+                ut.temp_total_swears,
                 ut.per_swear
                 from users u
                 JOIN users_to_teams ut
@@ -105,7 +104,7 @@ class Database {
                 u.username,
                 u.email,
                 u.identify_as,
-                u.temp_total_swears,
+                ut.temp_total_swears,
                 ut.team_id,
                 ut.per_swear
                 from users u
@@ -128,7 +127,22 @@ class Database {
                 // TODO is this correct
                 );
             }
-        addSwearToUser() {
+
+            // FINISHED!!
+            // REFACTOR seriously
+        addSwearToUser(params) {
+            let paramArr = []
+            params = params.split(',')
+            for (let each of params) {
+                paramArr.push(parseInt(each))
+            }
+            return this.db.none(
+                `UPDATE users_to_teams ut
+                SET temp_total_swears = temp_total_swears + 1
+                WHERE user_id = $1
+                AND team_id = $2
+                `, paramArr
+                )
 
         }
 

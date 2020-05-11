@@ -2,7 +2,7 @@ import * as React from 'react';
 import UserDashboard from './Components/UserDashboard';
 import CreateTeamForm from './Components/CreateTeamForm';
 import TeamTable from './Components/TeamTable'
-import { fetchUser, getTeams, getTeam, postTeam } from './helpers/api-fetchers';
+import { fetchUser, getTeams, getTeam, postSwear, postTeam } from './helpers/api-fetchers';
 import {AppState, Team, User, Teammate} from './interfaces'
 import 'antd/dist/antd.css';
 // import '@material-ui/core/styles';
@@ -27,8 +27,9 @@ class App extends React.Component<{}, AppState> {
             fetchUser(this.state.user.id)
             // REFACTOR this is hardcoded. might not need to be?
                 .then(data => this.setState(
-                    {user: data[0], teams: data[1]}))
-        } else return;
+                        {user: data[0], teams: data[1]}))
+            } else return;
+
 
     }
     componentDidUpdate(prevProps, prevState) {
@@ -61,7 +62,7 @@ class App extends React.Component<{}, AppState> {
                     user={this.state.user}
                     action={postTeam}
                 />
-
+                
                 <UserDashboard
                     teams={this.state.teams}
                     teamsData={this.state.teams}

@@ -42,6 +42,18 @@ router.get('/api/users/:user', (req, res, next) =>
     .catch(next)
 )
 
+
+// HOW DO ROUTES WORK
+
+router.post('/api/swears/:teammate', (req, res, next) =>
+
+    db
+        .addSwearToUser(req.params.teammate)
+        // .then(team=>res.send(team))
+        .then(console.log('req.query', req.params.teammate))
+        // .catch(next)
+);
+
 // REFACTOR idk this could probably use fixing
 router.get('/api/teams/:team', (req, res, next) =>
     db

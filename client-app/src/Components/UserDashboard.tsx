@@ -8,7 +8,7 @@ import { Team, Teammate } from '../interfaces';
 import {teamTableData} from '../helpers/local-data'
 import TableHeaders from './TableHeaders'  
 interface Props {
-    teams: object[];
+    teams: Team[];
     teamsData: object[];
     action: Function;
     getTeam: Function;
