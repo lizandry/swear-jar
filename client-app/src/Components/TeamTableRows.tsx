@@ -11,49 +11,32 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
 
 interface Props {
-    children: any;
-    team: Team;
-    teammates: Teammate[]
-    cellHeaders: string[]
-    // action: Function;
+    teammates?: Teammate[];
 }
 
-const useStyles = makeStyles({
-    table: {
-      minWidth: 650,
-    },
-  });
+const TeamTableRows = (props: Props) => {
+const teammates = props.teammates
 
-const TeamTable = (props: Props) => {
-    const classes = useStyles();
-    const team = props.team;
-    const teammates = props.teammates || [];
-
-    return <TableContainer component={Paper}>
-                <Toolbar 
-                // TODO accessibility
-                // alt={team.team_name}
-                >
-                    {team.team_name}
-                    </Toolbar>
-        <Table className={classes.table} aria-label="a dense table">
-            <TableBody>
-          {teammates.map((teammate) => (
-            <TableRow key={teammate.user_id} className='team-table-body'>
-              <TableCell component="th" scope="row">
+return (
+    <div>
+{/* {console.log('teammates', teammates)} */}
+    {/* <TableRow key={teammate.user_id}
+    className='team-table-body'
+    >
+        <TableCell component="th" scope="row">
                 {teammate.email}
               </TableCell>
               <TableCell align="right">{teammate.identify_as}</TableCell>
               <TableCell align="right">${teammate.per_swear}</TableCell>
               <TableCell align="right">{teammate.temp_total_swears}</TableCell>
               <TableCell align="right">${(teammate.per_swear * teammate.temp_total_swears)}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-        </Table>
-    </TableContainer>
 
+    </TableRow> */}
+    </div>
+
+
+)
 
 }
 
-export default TeamTable;
+export default TeamTableRows;

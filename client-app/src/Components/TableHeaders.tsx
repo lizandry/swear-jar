@@ -18,7 +18,6 @@ const TableHeaders = (props: Props) => {
 return(
 
     <TableHead>
-    {console.log('table head props', props)}
     <TableRow className='team-table-header'>
     {/* <TableCell>remove user button</TableCell> */}
     <TableCell>email</TableCell>

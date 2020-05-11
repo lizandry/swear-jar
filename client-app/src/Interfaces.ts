@@ -22,6 +22,7 @@ export interface Teammate {
     identify_as: string;
     temp_total_swears: number; // REFACTOR, join with swears table
     per_swear: number;
+    // addSwear?: Function
   }
 
 export interface User {
