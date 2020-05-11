@@ -20,14 +20,27 @@ const UserDashboard = (props: Props) => {
     useEffect(() => {
             if (!teams.length) return;
             props.action(
-                props.teams.map((t: Team) => t.id)
+                teams.map((t: Team) => t.id)
             ).then(
                 // data => console.log(data)
                 (res: Teammate[]) => setTeammates(res)
             );
     }, [teams]);
 
+    const [test, setTest] = useState<Teammate[][]>();
+    // useEffect(() => {
+    //     if (!teams.length) return;
+    //     props.getTeam(
+//             teams.map((t: Team) => t.id)
+//         ).then(
+//             data => console.log(data)
+//             // (res: Teammate[][]) => setTest(res)
+//         );
+// }, [teams]);
+
     // TODO: a whole bunch of post requests, figuring out how some of ant design's API stuff around columns works
+
+    // TODO render rows separately, call getTeam on team.id when mapping that part
     return(
         <div>
             {props.teams.map(team => {
