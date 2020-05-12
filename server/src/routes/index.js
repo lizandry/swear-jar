@@ -45,13 +45,12 @@ router.get('/api/users/:user', (req, res, next) =>
 
 // HOW DO ROUTES WORK
 
-router.post('/api/swears/:teammate', (req, res, next) =>
-
+router.post('/api/users/:user/:team', (req, res, next) =>
     db
-        .addSwearToUser(req.params.teammate)
-        // .then(team=>res.send(team))
-        .then(console.log('req.query', req.params.teammate))
-        // .catch(next)
+        .addSwearToUser([req.params.user, req.params.team])
+        .then(swear=>res.send(swear))
+        // .then(console.log('add swear index.js', req.params))
+        .catch(next)
 );
 
 // REFACTOR idk this could probably use fixing

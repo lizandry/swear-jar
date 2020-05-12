@@ -131,17 +131,20 @@ class Database {
             // FINISHED!!
             // REFACTOR seriously
         addSwearToUser(params) {
-            let paramArr = []
-            params = params.split(',')
-            for (let each of params) {
-                paramArr.push(parseInt(each))
-            }
+            
+            // let paramArr = []
+            // params = params.split(',')
+            // for (let each of params) {
+            //     if (each.length === 0) return;
+            //     paramArr.push(parseInt(each))
+            // }
+            console.log("paramarr", params)
             return this.db.none(
                 `UPDATE users_to_teams ut
                 SET temp_total_swears = temp_total_swears + 1
                 WHERE user_id = $1
                 AND team_id = $2
-                `, paramArr
+                `, params
                 )
 
         }

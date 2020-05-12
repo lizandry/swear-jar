@@ -1,7 +1,7 @@
 
 import React, {useEffect, useState} from 'react';
 import CreateTeamButton from './CreateTeamButton'
-import TeamTable from './TeamTable'
+// import TeamTable from './TeamTable'
 // import { Table, Tag } from 'antd';
 // const { Column, ColumnGroup } = Table;
 import { Team, Teammate } from '../interfaces';
@@ -24,6 +24,7 @@ interface Props {
     teamsData: object[];
     action: Function;
     getTeam: Function;
+    postSwear: Function;
 }
 
 const UserDashboard = (props: Props) => {
@@ -63,22 +64,25 @@ const UserDashboard = (props: Props) => {
     return(
         <div>
             {props.teams.map(team => {
-                return <TableContainer component={Paper}>
+                return <TableContainer 
+                component={Paper}
+                key={team.id}>
 
 
 {/* TODO get test iterated over */}
 {/* pass down addswear function */}
 {/* fix postTeam function */}
-{/* shoot i've been thinking about the getTeam function all wrong. setState from inside render? */}
 
-                    {console.log(test)}
+                    {/* {console.log(test)} */}
                     <Toolbar>{team.team_name}</Toolbar>
                         <Table>
                             <TableHeaders
                                 data={teamTableData}
                             />
                            <TeamTableRows 
-                            // teammates={props.getTeam(team.id)}
+                            team={team}
+                            getTeam={props.getTeam}
+                            postSwear={props.postSwear}
                            />
 
 

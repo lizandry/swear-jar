@@ -39,7 +39,7 @@ const TeamTable = (props: Props) => {
         <Table className={classes.table} aria-label="a dense table">
             <TableBody>
           {teammates.map((teammate) => (
-            <TableRow key={teammate.user_id} className='team-table-body'>
+            <TableRow key={teammate.id} className='team-table-body'>
               <TableCell component="th" scope="row">
                 {teammate.email}
               </TableCell>

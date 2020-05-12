@@ -1,7 +1,7 @@
 import * as React from 'react';
 import UserDashboard from './Components/UserDashboard';
 import CreateTeamForm from './Components/CreateTeamForm';
-import TeamTable from './Components/TeamTable'
+// import TeamTable from './Components/TeamTable'
 import { fetchUser, getTeams, getTeam, postSwear, postTeam } from './helpers/api-fetchers';
 import {AppState, Team, User, Teammate} from './interfaces'
 import 'antd/dist/antd.css';
@@ -69,6 +69,7 @@ class App extends React.Component<{}, AppState> {
                     // createTeam={postTeam}
                     action={getTeams}
                     getTeam={getTeam}
+                    postSwear={postSwear}
                 />
                 
             </div>

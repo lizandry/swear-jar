@@ -16,7 +16,7 @@ export interface Team {
 }
 export interface Teammate {
     team_id: number;
-    user_id: number;
+    id: number;
     username: string
     email: string;
     identify_as: string;

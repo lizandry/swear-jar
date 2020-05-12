@@ -82,10 +82,14 @@ export function getTeam(params: number) {
 
 //   FINISHED
   export function postSwear(user_id: number, team_id: number) {
-      let params = [user_id, team_id]
-    return fetch(`/api/swears/${params}`, {
+    //   let params = [user_id, team_id]
+    //   console.log('params in api fetch', params)
+    return fetch(`/api/users/${user_id}/${team_id}`, {
         method: 'POST',
-        body: JSON.stringify(params),
+        body: JSON.stringify({
+            user_id: user_id,
+            team_id: team_id
+        }),
         headers: {
             Accept: "application/json"
         },
@@ -94,7 +98,7 @@ export function getTeam(params: number) {
         return resp.json();
       } else {
         throw new Error(
-          `oops!! fetch('/api/swears/${user_id}') failed: Express server responded with HTTP ${resp.status} ${resp.statusText}`
+          `oops!! fetch('/api/users/${user_id}/${team_id}') failed: Express server responded with HTTP ${resp.status} ${resp.statusText}`
         );
       }
     });
