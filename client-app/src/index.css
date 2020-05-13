@@ -3,3 +3,13 @@
 .App {
 text-align: left;
 }
+
+.team-table-container {
+font-size: 7vh;
+
+}
+
+.team-table-body {
+    font-size: 2vh;
+    
+    }

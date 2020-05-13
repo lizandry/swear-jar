@@ -71,12 +71,12 @@ export function getTeam(params: number) {
     return fetch(`/api/users/${user_id}/${team_id}`, {
         method: 'POST',
         body: JSON.stringify({
-            user_id: user_id,
-            team_id: team_id
+            user_id,
+            team_id
         }),
         headers: {
             Accept: "application/json"
-        },
+        }
     }).then(resp => {
       if (resp.ok) {
         return resp.json();

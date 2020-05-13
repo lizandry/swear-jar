@@ -12,6 +12,7 @@ import Table from '@material-ui/core/Table';
 import TableContainer from '@material-ui/core/TableContainer';
 import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
+import {makeStyles} from '@material-ui/core/styles';
 
 interface Props {
     teams?: Team[]
@@ -38,7 +39,12 @@ const UserDashboard = (props: Props) => {
                         {team.team_name}
                     </Toolbar>
 
-                    <Table>
+                    <Table 
+                        aria-label='a dense table'
+                        className='team-table'
+                        padding='default'
+                        size='small'
+                    >
 
                         <TableHeaders
                             data={teamTableData}

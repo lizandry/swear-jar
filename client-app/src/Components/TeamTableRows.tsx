@@ -23,7 +23,7 @@ const TeamTableRows = (props: Props) => {
         .then(res => setTeammates(res));
     });
 
-    if (!teammates.length) return <TableRow className='team-table-loading'>loading...</TableRow>
+    if (!teammates.length) return <TableBody><TableRow className='team-table-loading'><TableCell>loading...</TableCell></TableRow></TableBody>
 
     return <TableBody
         className='team-table-body'
@@ -33,6 +33,8 @@ const TeamTableRows = (props: Props) => {
             return <TableRow 
                 key={teammate.id}
                 className='team-table-teammate-row'
+                hover={true}
+                // selected={true}
             >
                 {/* personal data */}
                 <TableCell 
@@ -57,6 +59,7 @@ const TeamTableRows = (props: Props) => {
                 </TableCell>
 
                 {/* adds a 'swear' to database */}
+                {/* TODO have onClick either re-render the component or refactor the db call so that it re-renders just this row */}
                 <TableCell>
                     <Button
                         onClick={() => props.postSwear(teammate.id, teammate.team_id)}
