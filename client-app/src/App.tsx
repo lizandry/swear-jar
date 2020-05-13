@@ -1,12 +1,9 @@
 import * as React from 'react';
 import UserDashboard from './Components/UserDashboard';
 import CreateTeamForm from './Components/CreateTeamForm';
-// import TeamTable from './Components/TeamTable'
 import { fetchUser, getTeams, getTeam, postSwear, postTeam } from './helpers/api-fetchers';
 import {AppState, Team, User, Teammate} from './interfaces'
 import 'antd/dist/antd.css';
-// import '@material-ui/core/styles';
-import '@material-ui/core';
 
 class App extends React.Component<{}, AppState> {
     constructor(props) {
@@ -20,8 +17,9 @@ class App extends React.Component<{}, AppState> {
         };
     }
 
-// IN PROGRESS let's hardcode user 1 for now, and get the table to map their teams
+// TODO let's hardcode user 1 for now, and get the table to map their teams
 // TODO else statement for login prompt
+
     componentDidMount() {
         if (this.state.user.id !== 0) {
             fetchUser(this.state.user.id)
@@ -32,31 +30,11 @@ class App extends React.Component<{}, AppState> {
 
 
     }
-    componentDidUpdate(prevProps, prevState) {
-        // only update chart if the data has changed
-        if (prevState !== this.state) {
-            // if (!this.state.teams) return;
-            // for (i = 0, i < this.state.teams.length, i++) {
-            //     console.log(i)
-            // }
-            // console.log('teams', this.state.teams)
-         
-        }
-      }
     
-
     render() {
 // {console.log('state check!!', this.state)}
-// const teamWithTeammates: [Team, Teammate[]] = [,[]]
-
-// if (!this.state.teams.length) return;
-//     for (team of this.state.teams) {
-//         teamWithTeammates.push(team)
-//     }
-
 
         return (
-            
             <div className='App'>
                 <CreateTeamForm
                     user={this.state.user}
@@ -65,13 +43,10 @@ class App extends React.Component<{}, AppState> {
                 
                 <UserDashboard
                     teams={this.state.teams}
-                    teamsData={this.state.teams}
                     // createTeam={postTeam}
-                    action={getTeams}
                     getTeam={getTeam}
                     postSwear={postSwear}
                 />
-                
             </div>
         )
     }

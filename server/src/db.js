@@ -116,7 +116,7 @@ class Database {
             `, params
             );
         }
-
+    // IN PROGRESS
         addTeam(params) {
             console.log('addTeam', params)
             return this.db.none(
@@ -128,17 +128,8 @@ class Database {
                 );
             }
 
-            // FINISHED!!
-            // REFACTOR seriously
+    // COMPLETE!!
         addSwearToUser(params) {
-            
-            // let paramArr = []
-            // params = params.split(',')
-            // for (let each of params) {
-            //     if (each.length === 0) return;
-            //     paramArr.push(parseInt(each))
-            // }
-            console.log("paramarr", params)
             return this.db.none(
                 `UPDATE users_to_teams ut
                 SET temp_total_swears = temp_total_swears + 1

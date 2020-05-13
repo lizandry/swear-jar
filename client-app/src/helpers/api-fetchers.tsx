@@ -14,22 +14,6 @@ export function fetchAllUsers() {
     });
   }
 
-  export function fetchAllTeams() {
-    return fetch('/api/teams', {
-      headers: {
-        Accept: "application/json"
-      }
-    }).then(resp => {
-      if (resp.ok) {
-        return resp.json();
-      } else {
-        throw new Error(
-          `oops!! fetch('/api/teams') failed: Express server responded with HTTP ${resp.status} ${resp.statusText}.`
-        );
-      }
-    });
-  }
-
 //   COMPLETE!!
 export function fetchUser(params: number) {
     return fetch(`/api/users/${params}`, {
@@ -64,6 +48,7 @@ export function getTeam(params: number) {
     });
   }
 
+//   TODO this is a faster way of fetching team data
   export function getTeams(params: number[]) {
     return fetch(`/api/teams?ids=${params}`, {
         headers: {
@@ -80,10 +65,9 @@ export function getTeam(params: number) {
     });
   }
 
-//   FINISHED
+//   COMPLETE!!
+// REFACTOR these params come out as '.user' and '.team' in index.js
   export function postSwear(user_id: number, team_id: number) {
-    //   let params = [user_id, team_id]
-    //   console.log('params in api fetch', params)
     return fetch(`/api/users/${user_id}/${team_id}`, {
         method: 'POST',
         body: JSON.stringify({

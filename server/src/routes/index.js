@@ -15,14 +15,6 @@ router.get('/', function (req, res) {
       .then((users) => res.send(users))
       .catch(next)
   );
-  // REFACTOR probably don't need this
-//   router.get('/api/teams', (_unused, res, next) =>
-//   db
-//       .getAllTeams()
-//       .then((teams) => res.send(teams))
-//       .catch(next)
-//   );
-
 
   // TODO set up user login  here
 // app.get('/api/login', (_unused, res, next) =>
@@ -30,7 +22,9 @@ router.get('/', function (req, res) {
 // );
 
 
-// FINISHED
+// COMPLETE!!
+// populates user's info from database, as well as info for the teams they're on
+// REFACTOR to include the getTeams function/route
 router.get('/api/users/:user', (req, res, next) =>
     Promise.all([
         db
@@ -42,45 +36,39 @@ router.get('/api/users/:user', (req, res, next) =>
     .catch(next)
 )
 
-
-// HOW DO ROUTES WORK
-
+// adds a swear to users_to_teams table
 router.post('/api/users/:user/:team', (req, res, next) =>
     db
         .addSwearToUser([req.params.user, req.params.team])
         .then(swear=>res.send(swear))
-        // .then(console.log('add swear index.js', req.params))
         .catch(next)
 );
 
-// REFACTOR idk this could probably use fixing
-router.get('/api/teams/:team', (req, res, next) =>
-    db
-        .getTeam(req.params.team)
-        .then(team=>res.send(team))
-        // .then(console.log('req.params', req.params))
-        .catch(next)
-);
 
-// maybe can combine with /api/users/:user code
+// gets all teammates for all of a given user's teams
+// would have to sort them, to populate team tables
 router.get('/api/teams', (req, res, next) =>
-    db
-        .getTeams(req.query.ids)
-        .then(team=>res.send(team))
-        // .then(console.log('req.params', req.query))
-        .catch(next)
+db
+.getTeams(req.query.ids)
+.then(team=>res.send(team))
+.catch(next)
 );
 
-// app.post('/users', (req, res) => {
-   
-//     res.status(200).send(website.addUser(req.body));
-// });
+// IN PROGRESS adding a team to the database
 router.post('/api/teams/', (req, res, next) =>
-    db
-        // .addATeam(req.body)
-        // .then(team=>res.send(team))
+db
+// .addATeam(req.body)
+// .then(team=>res.send(team))
         // // .then(console.log('req.params', req.params))
         // .catch(next)
+        );
+        
+// gets all users on a given team
+router.get('/api/teams/:team', (req, res, next) =>
+db
+.getTeam(req.params.team)
+.then(team=>res.send(team))
+.catch(next)
 );
 
 // router.use("/admins", require("./admins.route"));
