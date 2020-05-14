@@ -5,11 +5,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
 interface Props {
-    data?: string[]
+    teamTableData?: string[]
 }
 
-const TableHeaders = (props: Props) => {
-    const data = props.data
+const TeamTableHeaders = (props: Props) => {
+    const data = props.teamTableData
 
     return(
         <TableHead className='team-table-header'>
@@ -26,4 +26,4 @@ const TableHeaders = (props: Props) => {
     )
 }
 
-export default TableHeaders;
+export default TeamTableHeaders;

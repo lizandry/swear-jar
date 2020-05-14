@@ -1,6 +1,5 @@
 import * as React from 'react';
 import UserDashboard from './Components/UserDashboard';
-import CreateTeamForm from './Components/CreateTeamForm';
 import { fetchUser, getTeams, getTeam, postSwear, postTeam } from './helpers/api-fetchers';
 import {AppState, Team, User, Teammate} from './interfaces'
 import 'antd/dist/antd.css';
@@ -36,16 +35,13 @@ class App extends React.Component<{}, AppState> {
 
         return (
             <div className='App'>
-                <CreateTeamForm
-                    user={this.state.user}
-                    action={postTeam}
-                />
                 
                 <UserDashboard
                     teams={this.state.teams}
-                    // createTeam={postTeam}
+                    user={this.state.user}
                     getTeam={getTeam}
                     postSwear={postSwear}
+                    postTeam={postTeam}
                 />
             </div>
         )

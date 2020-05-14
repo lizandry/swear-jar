@@ -91,7 +91,7 @@ export function getTeam(params: number) {
   export function postTeam(params) {
     return fetch(`/api/teams/`, {
         method: 'POST',
-        body: JSON.stringify(params),
+        body: JSON.stringify({params}),
         headers: {
             Accept: "application/json"
         },

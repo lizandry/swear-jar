@@ -6,17 +6,17 @@ import {AppState, Team, User} from '../interfaces';
 // import TextField from '@material-ui/core/TextField';
 
 interface Props {
-    user: User;
-    action: Function;
+    user?: User;
+    postTeam?: Function;
 }
 
 interface State {
-swear: string;
-team_name: string;
-pledge_url: string;
-end_date: string;
-// owner: User
-owner: number;
+swear?: string;
+team_name?: string;
+pledge_url?: string;
+end_date?: string;
+owner: User
+// owner?: number;
 }
 
 class CreateTeamForm extends React.Component<Props, State> {
@@ -27,10 +27,9 @@ class CreateTeamForm extends React.Component<Props, State> {
         team_name: '',
         pledge_url: '',
         end_date: '',
-        owner: this.props.user.id
+        owner: this.props.user
     }
     // user = this.props.user
-    this.postTeam = this.postTeam.bind(this);
 }
 // IN PROGRESS: this doesn't do what i want it to do
 onDateChange(date, dateString) {
@@ -38,64 +37,44 @@ onDateChange(date, dateString) {
 
   }
 
-//   IN PROGRESS this IS posting
-async postTeam(event) {
-    event.preventDefault();
-    await fetch('/api/teams/', {
-        method: 'POST',
-        body: JSON.stringify(
-            {
-                // REFACTOR does this need to be spread?
-                ...this.state
-            }
-        ),
-        headers: {
-          'Content-Type': 'application/json charset=UTF-8',
-          "Accept": "application/json"
-        }
-        }).then(resp => {
-            if (resp.ok) {
-            return resp.json();
-            } else {
-            throw new Error(
-                `oops!! post('/api/teams/') failed: Express server responded with HTTP ${resp.status} ${resp.statusText}`
-            );
-            }
-        });
-
-}
 render() {
-    // console.log(this.state)
-    const{ user, action } = this.props;
+    console.log(this.state)
+    const{ user } = this.props;
 
     return(
         <Form 
-        className='create-team'
-        name='create-team'
-        id='create-team-form'
-        labelAlign='left'
-        onFinish={this.postTeam}
+            className='create-team'
+            name='create-team'
+            id='create-team-form'
+            labelAlign='left'
+            // onFinish={this.props.postTeam}
 
-    >
+        >
 
         <Form.Item
             className='create-team-inputs'
             label='team name'
             name='team name'
-        
-        >
-            <Input />
+            
+            >
+            <Input
+                onChange={(event)=>this.setState({team_name: event.target.value})}
+            
+            />
         </Form.Item>
 
         <Form.Item
         // TODO look up apostrophe rules
             className='create-team-inputs'
             label='what`s your swear?'
-            name='team name'
+            name='swear field'
         
         >
             {/* REFACTOR inline? */}
-            <Input />
+            <Input
+                onChange={(event)=>this.setState({swear: event.target.value})}
+            
+            />
         </Form.Item>
 
         <Form.Item
@@ -106,7 +85,9 @@ render() {
         >
             {/* TODO map api calls to outside urls to this */}
         {/* TODO event target value will populate the rest of this page with api details */}
-            <Select />
+            <Select 
+                // onSelect={(event)=>this.setState({team_name: event.target.value})}
+            />
         </Form.Item>
 
         <Form.Item
@@ -114,7 +95,9 @@ render() {
             label='team/campaign end date'
             name='end date'
         >
-            <DatePicker onChange={this.onDateChange} />
+            <DatePicker 
+                // onChange={(event)=>this.setState({team_name: event.target.value})} 
+            />
         </Form.Item>
 
         <Button
@@ -124,8 +107,8 @@ render() {
         </Button>
 
         <Button
-            type="primary" 
-            htmlType="submit"
+            type='primary' 
+            htmlType='submit'
         >
             submit team
         </Button>
