@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Form, Input, Button, Select, DatePicker } from 'antd';
-// import {postTeam } from '../helpers/api-fetchers';
+
+import { Form, Input, Button, Select,  DatePicker } from 'antd';
+const { Option } = Select;
+
 import {AppState, Team, User} from '../interfaces';
-// import { styled } from '@material-ui/core/styles';
-// import TextField from '@material-ui/core/TextField';
 
 interface Props {
     user?: User;
@@ -13,9 +13,10 @@ interface Props {
 interface State {
 swear?: string;
 team_name?: string;
-pledge_url?: string;
-end_date?: string;
-owner: User
+// REFACTOR onChange for pledge_url is weird about what Type 'value' is
+pledge_url?: any;
+end_date?: any;
+owner: User['id']
 // owner?: number;
 }
 
@@ -27,94 +28,101 @@ class CreateTeamForm extends React.Component<Props, State> {
         team_name: '',
         pledge_url: '',
         end_date: '',
-        owner: this.props.user
+        owner: this.props.user.id
     }
-    // user = this.props.user
 }
-// IN PROGRESS: this doesn't do what i want it to do
-onDateChange(date, dateString) {
-    dateString => this.setState({end_date: dateString})
 
-  }
+    onFinish() {
+        this.props.postTeam(this.state)
 
-render() {
-    console.log(this.state)
-    const{ user } = this.props;
+}
+    render() {
+        console.log(this.state)
 
-    return(
-        <Form 
-            className='create-team'
-            name='create-team'
-            id='create-team-form'
-            labelAlign='left'
-            // onFinish={this.props.postTeam}
+        return(
+            <Form 
+                className='create-team'
+                layout='vertical'
+                name='create-team'
+                id='create-team-form'
+                labelAlign='left'
+                onFinish={() => this.props.postTeam(this.state)}
 
-        >
+            >
 
-        <Form.Item
-            className='create-team-inputs'
-            label='team name'
-            name='team name'
+            <Form.Item
+                className='create-team-inputs'
+                label='team name'
+                name='team name'
+                
+                >
+                <Input
+                    onChange={(event)=>this.setState({team_name: event.target.value})}
+                
+                />
+            </Form.Item>
+
+            <Form.Item
+                className='create-team-inputs'
+                label={`what's your swear`}
+                name='swear field'
             
             >
-            <Input
-                onChange={(event)=>this.setState({team_name: event.target.value})}
+                <Input
+                    onChange={(event)=>this.setState({swear: event.target.value})}
+                
+                />
+            </Form.Item>
+
+            <Form.Item
+                className='create-team-inputs'
+                label='choose a campaign'
+                name='crowdfunding campaign'
             
-            />
-        </Form.Item>
+            >
+                {/* TODO map api calls to outside urls to this */}
+            {/* TODO onChange will populate the rest of this page with api details */}
+                <Select 
+                // antdesign docs have an example for "other" option. ability to enter own url or choose from a new set of campaigns would be great
+                    placeholder='who would you like to support?'
+                    onChange={(value) => this.setState({pledge_url: value})}
+                >
+                    <Option value='temp url'>props dot temp url</Option>
+                    <Option value='temp_url'>props dot temp_url</Option>
+                    <Option value='tempUrl'>props dot tempUrl</Option>
+                </Select>
+            </Form.Item>
 
-        <Form.Item
-        // TODO look up apostrophe rules
-            className='create-team-inputs'
-            label='what`s your swear?'
-            name='swear field'
-        
-        >
-            {/* REFACTOR inline? */}
-            <Input
-                onChange={(event)=>this.setState({swear: event.target.value})}
-            
-            />
-        </Form.Item>
+            <Form.Item
+                className='create-team-inputs'
+                label='team/campaign end date'
+                name='end date'
+            >
+                <DatePicker 
+                // onChange={this.onDateChange}
+                    onChange={(moment, dateString)=> this.setState({end_date: dateString})}
+                />
+            </Form.Item>
 
-        <Form.Item
-            className='create-team-inputs'
-            label='who do you want to support?'
-            name='crowdfunding campaign'
-        
-        >
-            {/* TODO map api calls to outside urls to this */}
-        {/* TODO event target value will populate the rest of this page with api details */}
-            <Select 
-                // onSelect={(event)=>this.setState({team_name: event.target.value})}
-            />
-        </Form.Item>
+            <Form.Item>
+                <Button
 
-        <Form.Item
-            className='create-team-inputs'
-            label='team/campaign end date'
-            name='end date'
-        >
-            <DatePicker 
-                // onChange={(event)=>this.setState({team_name: event.target.value})} 
-            />
-        </Form.Item>
+                >
+                    {/* cancel */}
+                </Button>
+            </Form.Item>
 
-        <Button
-        
-        >
-{/* cancel */}
-        </Button>
-
-        <Button
-            type='primary' 
-            htmlType='submit'
-        >
-            submit team
-        </Button>
-    </Form>
-    )
-}
+            <Form.Item>
+                <Button
+                    type='primary' 
+                    htmlType='submit'
+                    >
+                    submit team
+                </Button>
+            </Form.Item>
+        </Form>
+        )
+    }
 }
 
 // const CreateSomething = (props) => {

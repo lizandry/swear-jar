@@ -17,12 +17,13 @@ interface Props {
 }
 
 const UserDashboard = (props: Props) => {
-    const teams = props.teams;
+    const {teams, user} = props;
 
     return(
         <div>
 
             <CreateTeamForm
+                user={user}
                 postTeam={props.postTeam}
             />
 

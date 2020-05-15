@@ -56,7 +56,9 @@ db
 
 // IN PROGRESS adding a team to the database
 router.post('/api/teams/', (req, res, next) =>
-db
+console.log('index.js', req.params)
+
+// db
 // .addATeam(req.body)
 // .then(team=>res.send(team))
         // // .then(console.log('req.params', req.params))
