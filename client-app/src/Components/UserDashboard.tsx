@@ -4,7 +4,7 @@ import React from 'react';
 import { User, Team, Teammate } from '../interfaces'; // REFACTOR
 import {teamTableData} from '../helpers/local-data' // REFACTOR
 
-import CreateTeamButton from './CreateTeamButton' // REFACTOR
+import CreateTeamModal from './CreateTeamModal' // REFACTOR
 import CreateTeamForm from './CreateTeamForm'
 import TeamTable from './TeamTable'
 
@@ -21,7 +21,10 @@ const UserDashboard = (props: Props) => {
 
     return(
         <div>
-
+        <CreateTeamModal
+            user={user}
+            postTeam={props.postTeam}
+        />
             <CreateTeamForm
                 user={user}
                 postTeam={props.postTeam}

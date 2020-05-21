@@ -7,13 +7,13 @@ const db = new Database(dbName);
 
 router.get('/', function (req, res) {
     res.send('Hello World!');
-    });
+});
 
-  router.get('/api/users', (_unused, res, next) =>
-  db
-      .getAllUsers()
-      .then((users) => res.send(users))
-      .catch(next)
+router.get('/api/users', (_unused, res, next) =>
+    db
+        .getAllUsers()
+        .then((users) => res.send(users))
+        .catch(next)
   );
 
   // TODO set up user login  here
@@ -21,8 +21,6 @@ router.get('/', function (req, res) {
 // db.getAllUsers()
 // );
 
-
-// COMPLETE!!
 // populates user's info from database, as well as info for the teams they're on
 // REFACTOR to include the getTeams function/route
 router.get('/api/users/:user', (req, res, next) =>
@@ -36,6 +34,7 @@ router.get('/api/users/:user', (req, res, next) =>
     .catch(next)
 )
 
+// COMPLETE!!
 // adds a swear to users_to_teams table
 router.post('/api/users/:user/:team', (req, res, next) =>
     db
@@ -54,23 +53,22 @@ db
 .catch(next)
 );
 
-// IN PROGRESS adding a team to the database
-router.post('/api/teams/', (req, res, next) =>
-console.log('index.js', req.params)
-
-// db
-// .addATeam(req.body)
-// .then(team=>res.send(team))
-        // // .then(console.log('req.params', req.params))
-        // .catch(next)
+// COMPLETE!!
+// adds new team to db
+router.post('/api/teams/team', (req, res, next) =>
+    db
+        .addTeam(req.body)
+        .then(team => res.send(team))
+        .catch(next)
         );
-        
+       
+// COMPLETE!!
 // gets all users on a given team
 router.get('/api/teams/:team', (req, res, next) =>
-db
-.getTeam(req.params.team)
-.then(team=>res.send(team))
-.catch(next)
+    db
+        .getTeam(req.params.team)
+        .then(team => res.send(team))
+        .catch(next)
 );
 
 // router.use("/admins", require("./admins.route"));
