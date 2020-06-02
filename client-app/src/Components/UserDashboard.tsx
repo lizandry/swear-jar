@@ -7,6 +7,7 @@ import {teamTableData} from '../helpers/local-data' // REFACTOR
 import CreateTeamModal from './CreateTeamModal' // REFACTOR
 import CreateTeamForm from './CreateTeamForm'
 import TeamTable from './TeamTable'
+import TestModal from './TestModal'
 
 interface Props {
     teams?: Team[]
@@ -21,14 +22,20 @@ const UserDashboard = (props: Props) => {
 
     return(
         <div>
-        <CreateTeamModal
+            <TestModal
+                user={user}
+                postTeam={props.postTeam}
+
+            />
+
+        {/* <CreateTeamModal
             user={user}
             postTeam={props.postTeam}
         />
             <CreateTeamForm
                 user={user}
                 postTeam={props.postTeam}
-            />
+            /> */}
 
 
 
@@ -37,7 +44,7 @@ const UserDashboard = (props: Props) => {
 
 
 
-            {teams.map(team => {
+            {/* {teams.map(team => {
                 return <TeamTable 
                     key={team.id}
                     team={team}
@@ -45,7 +52,7 @@ const UserDashboard = (props: Props) => {
                     getTeam={props.getTeam}
                     postSwear={props.postSwear}
                 />
-            })}
+            })} */}
         </div>
     )
 }

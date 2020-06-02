@@ -101,7 +101,7 @@ class CreateTeamForm extends React.Component<Props, State> {
                 name='end date'
                 >
                 <DatePicker 
-                    onChange={(moment, dateString)=> this.setState({end_date: dateString})}
+                    onChange={(moment, dateString: string)=> this.setState({end_date: dateString})}
                     />
             </Form.Item>
 

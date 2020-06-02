@@ -11,8 +11,9 @@ export interface Team {
     swear?: string;
     team_name?: string;
     pledge_url?: string;
-    end_date?: string; // TODO 
-    owner?: number;
+    end_date?: string;
+    // owner?: number;
+    owner: User['id']
 }
 export interface Teammate {
     team_id: number;
