@@ -4,10 +4,9 @@ import React from 'react';
 import { User, Team, Teammate } from '../interfaces'; // REFACTOR
 import {teamTableData} from '../helpers/local-data' // REFACTOR
 
-import CreateTeamModal from './CreateTeamModal' // REFACTOR
-import CreateTeamForm from './CreateTeamForm'
+import CreateTeamModal from './CreateTeamModal'
 import TeamTable from './TeamTable'
-import TestModal from './TestModal'
+import TestModal from './CreateTeamModal'
 
 interface Props {
     teams?: Team[]
@@ -27,21 +26,6 @@ const UserDashboard = (props: Props) => {
                 postTeam={props.postTeam}
 
             />
-
-        {/* <CreateTeamModal
-            user={user}
-            postTeam={props.postTeam}
-        />
-            <CreateTeamForm
-                user={user}
-                postTeam={props.postTeam}
-            /> */}
-
-
-
-
-
-
 
 
             {/* {teams.map(team => {

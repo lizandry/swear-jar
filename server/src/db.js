@@ -117,7 +117,7 @@ class Database {
         }
 // COMPLETE!!
         addTeam(params) {
-            console.log('addTeam db.js', params)
+            // console.log('addTeam db.js', params)
             return this.db.none(
                 `INSERT INTO 
                 teams(swear, team_name, pledge_url, end_date, owner)

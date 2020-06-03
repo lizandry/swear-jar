@@ -1,84 +1,161 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+import { Button, DatePicker, Form, Input, Modal, Select } from 'antd';
+const { Option } = Select;
+import {Team, User} from '../interfaces';
 
-import { User, Team, Teammate } from '../interfaces'; // REFACTOR
-import {teamTableData} from '../helpers/local-data' // REFACTOR
+// interface Values {
+//   swear: string;
+//   team_name: string;
+//   pledge_url: string;
+//   end_date: any;
+//   owner: User['id']
+// }
 
-import CreateTeamForm from './CreateTeamForm'
-
-import { Modal, Button } from 'antd';
-
-interface Props {
+interface FormProps {
     user?: User;
     postTeam?: Function;
+  visible?: boolean;
+  onCreate?: (values: Team) => void;
+  onCancel?: () => void;
+}
+interface ModalProps {
+     user: User;
+    postTeam: Function;
 }
 
-interface State {
-    ModalContent: any;
-    visible: boolean;
-    confirmLoading: boolean;
-}
+// REFACTOR this works, so i'm leaving it for now. but i need to read more about <> vs props:
+const CreateTeamForm: React.FC<FormProps> = ({
+    user,
+    postTeam,
+    visible,
+    onCreate,
+    onCancel,
+}) => {
+  const [form] = Form.useForm();
+  return (
+    <Modal
+      
+      visible={visible}
+      title="create a new team"
+      okText="create"
+      cancelText="cancel"
+      onCancel={onCancel}
+      onOk={() => {
+        form
+            .validateFields()
+            .then(values => {
+                form.resetFields();
+                onCreate(values);
+            })
+          .catch(info => {
+            console.log('Validate Failed:', info);
+          });
+      }}
+    >
+    <Form
+        form={form}
+        className='create-team'
+        layout='vertical'
+        name='create-team'
+        id='create-team-form'
+        // initialValues={{ owner: user.id }}
+        labelAlign='left'
+    >
 
-class CreateTeamModal extends React.Component<Props, State> {
-    constructor(props: Props) {
-        super(props)
-    this.state = {
-        ModalContent: <CreateTeamForm
-                        user={this.props.user}
-                        postTeam={this.props.postTeam}
-                    />,
-        visible: false,
-        confirmLoading: false,
-  };
-}
+      {/* REFACTOR this is ugly and it yells at me. but it does work */}
+        <Form.Item
+                className='create-team-inputs bruteForce'
+                name='owner'
+                initialValue={user.id}
+                
+                >
+                </Form.Item>
 
-  showModal = () => {
-    this.setState({
-      visible: true,
-    });
-  };
-
-  handleOk = () => {
-    this.setState({
-      ModalContent: 'thank you for creating your team!',
-      confirmLoading: true,
-    });
-    setTimeout(() => {
-      this.setState({
-        visible: false,
-        confirmLoading: false,
-      });
-    }, 2000);
-  };
-
-  handleCancel = () => {
-    console.log('Clicked cancel button');
-    this.setState({
-      visible: false,
-    });
-  };
-
-  render() {
-    const { visible, confirmLoading, ModalContent } = this.state;
-    return (
-      <div>
-        <Button 
-            type='primary' 
-            onClick={this.showModal}>
-          create a team
-        </Button>
-        <Modal
-          title='create a team'
-          visible={visible}
-          onOk={this.handleOk}
-          confirmLoading={confirmLoading}
-          onCancel={this.handleCancel}
+        <Form.Item
+            className='create-team-inputs'
+            label='name your team'
+            name='team'
+            rules={[{ required: true, message: 'please give your team a name!' }]}
         >
-          {ModalContent}
-        </Modal>
-      </div>
-    );
-  }
-}
+            <Input />
+        </Form.Item>
 
+        <Form.Item 
+            className='create-team-inputs'
+            label={`what's your swear`}
+            name='swear'
+            rules={[{ required: true, message: 'pick a swear!' }]}
+        >
+            <Input 
+                // type="textarea" 
+            />
+        </Form.Item>
 
+        <Form.Item
+                className='create-team-inputs'
+                label='choose a campaign'
+                name='pledge'
+                
+                >
+                {/* TODO map api calls to outside urls to this */}
+            {/* TODO onChange will populate the rest of this page with api details */}
+                <Select 
+                // antdesign docs have an example for "other" option. ability to enter own url or choose from a new set of campaigns would be great
+                placeholder='who would you like to support?'
+               
+                >
+                    <Option value='temp url'>props dot temp url</Option>
+                    <Option value='temp_url'>props dot temp_url</Option>
+                    <Option value='tempUrl'>props dot tempUrl</Option>
+                </Select>
+            </Form.Item>
+
+            <Form.Item
+                className='create-team-inputs'
+                label='team/campaign end date'
+                name='endDate'
+                >
+                <DatePicker 
+                    onChange={(moment, dateString: string)=> {return dateString}}
+                />
+            </Form.Item>
+
+            
+        
+      </Form>
+    </Modal>
+  );
+};
+
+const CreateTeamModal = (props: ModalProps) => {
+  const [visible, setVisible] = useState(false);
+
+  const onCreate = values => {
+    // console.log('Received values of form: ', values);
+    props.postTeam(values)
+    setVisible(false);
+  };
+
+  return (
+    <div>
+      <Button
+        type="primary"
+        onClick={() => {
+          setVisible(true);
+        }}
+      >
+        create a new team!!
+      </Button>
+      <CreateTeamForm
+      user={props.user}
+      postTeam={props.postTeam}
+        visible={visible}
+        onCreate={onCreate}
+        onCancel={() => {
+          setVisible(false);
+        }}
+      />
+    </div>
+  );
+};
 export default CreateTeamModal;
