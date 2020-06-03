@@ -28,6 +28,7 @@ const UserDashboard = (props: Props) => {
 
             /> */}
 
+{/* here's the completely-working submit form */}
         <CreateTeamModal
             user={user}
             postTeam={props.postTeam}
@@ -43,8 +44,8 @@ const UserDashboard = (props: Props) => {
 
 
 
-
-            {/* {teams.map(team => {
+{/* tables, postSwear works but doesn't rerender the component */}
+            {teams.map(team => {
                 return <TeamTable 
                     key={team.id}
                     team={team}
@@ -52,7 +53,7 @@ const UserDashboard = (props: Props) => {
                     getTeam={props.getTeam}
                     postSwear={props.postSwear}
                 />
-            })} */}
+            })}
         </div>
     )
 }
