@@ -11,15 +11,19 @@ import {AppState, Team, User} from '../interfaces';
 //   owner: User['id']
 // }
 
-interface Props {
+interface CreateTeamFormProps {
     user: User;
     postTeam: Function;
   visible?: boolean;
   onCreate?: (values: Team) => void;
   onCancel?: () => void;
 }
+interface TestModalProps {
+     user: User;
+    postTeam: Function;
+}
 
-const TestModal: React.FC<Props> = ({
+const CreateTeamForm: React.FC<CreateTeamFormProps> = ({
     visible,
     onCreate,
     onCancel,
@@ -28,9 +32,9 @@ const TestModal: React.FC<Props> = ({
   return (
     <Modal
       visible={visible}
-      title="Create a new collection"
-      okText="Create"
-      cancelText="Cancel"
+      title="create a new team"
+      okText="create"
+      cancelText="cancel"
       onCancel={onCancel}
       onOk={() => {
         form
@@ -57,6 +61,7 @@ const TestModal: React.FC<Props> = ({
                 className='create-team-inputs'
                 name='user id'
                 // value={props.user.id}
+                // TODO IN PROGRESS making this happen. i think i can set the initialvalue in the form component?
                 
                 >
 
@@ -116,7 +121,7 @@ const TestModal: React.FC<Props> = ({
   );
 };
 
-const ModalButton = () => {
+const TestModal = (props: TestModalProps) => {
   const [visible, setVisible] = useState(false);
 
   const onCreate = values => {
@@ -133,16 +138,17 @@ const ModalButton = () => {
           setVisible(true);
         }}
       >
-        New Collection
+        create a new team!!
       </Button>
-      {/* <TestModal
+      <CreateTeamForm
+      user={props.user}
+      postTeam={props.postTeam}
         visible={visible}
-        // postTeam={props.postTeam}
         onCreate={onCreate}
         onCancel={() => {
           setVisible(false);
         }}
-      /> */}
+      />
     </div>
   );
 };
