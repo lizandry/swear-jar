@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, DatePicker, Form, Input, Modal, Select } from 'antd';
 const { Option } = Select;
-import {AppState, Team, User} from '../interfaces';
+import {Team, User} from '../interfaces';
 
 // interface Values {
 //   swear: string;
@@ -12,8 +12,8 @@ import {AppState, Team, User} from '../interfaces';
 // }
 
 interface CreateTeamFormProps {
-    user: User;
-    postTeam: Function;
+    user?: User;
+    postTeam?: Function;
   visible?: boolean;
   onCreate?: (values: Team) => void;
   onCancel?: () => void;
@@ -23,7 +23,10 @@ interface TestModalProps {
     postTeam: Function;
 }
 
+// REFACTOR this works, so i'm leaving it for now. but i need to read more about <> vs props:
 const CreateTeamForm: React.FC<CreateTeamFormProps> = ({
+    user,
+    postTeam,
     visible,
     onCreate,
     onCancel,
@@ -31,6 +34,7 @@ const CreateTeamForm: React.FC<CreateTeamFormProps> = ({
   const [form] = Form.useForm();
   return (
     <Modal
+      
       visible={visible}
       title="create a new team"
       okText="create"
@@ -54,23 +58,23 @@ const CreateTeamForm: React.FC<CreateTeamFormProps> = ({
         layout='vertical'
         name='create-team'
         id='create-team-form'
-        // initialValues={owner: props.user.id}
+        // initialValues={{ owner: user.id }}
         labelAlign='left'
     >
+
+      {/* REFACTOR this is ugly and it yells at me. but it does work */}
         <Form.Item
-                className='create-team-inputs'
-                name='user id'
-                // value={props.user.id}
-                // TODO IN PROGRESS making this happen. i think i can set the initialvalue in the form component?
+                className='create-team-inputs bruteForce'
+                name='owner'
+                initialValue={user.id}
                 
                 >
-
                 </Form.Item>
 
         <Form.Item
             className='create-team-inputs'
-            label='team name'
-            name='team name'
+            label='name your team'
+            name='team'
             rules={[{ required: true, message: 'please give your team a name!' }]}
         >
             <Input />
@@ -79,7 +83,7 @@ const CreateTeamForm: React.FC<CreateTeamFormProps> = ({
         <Form.Item 
             className='create-team-inputs'
             label={`what's your swear`}
-            name='swear field'
+            name='swear'
             rules={[{ required: true, message: 'pick a swear!' }]}
         >
             <Input 
@@ -90,7 +94,7 @@ const CreateTeamForm: React.FC<CreateTeamFormProps> = ({
         <Form.Item
                 className='create-team-inputs'
                 label='choose a campaign'
-                name='crowdfunding campaign'
+                name='pledge'
                 
                 >
                 {/* TODO map api calls to outside urls to this */}
@@ -109,12 +113,14 @@ const CreateTeamForm: React.FC<CreateTeamFormProps> = ({
             <Form.Item
                 className='create-team-inputs'
                 label='team/campaign end date'
-                name='end date'
+                name='endDate'
                 >
                 <DatePicker 
-                    onChange={(moment, dateString)=> {return dateString}}
+                    onChange={(moment, dateString: string)=> {return dateString}}
                 />
             </Form.Item>
+
+            
         
       </Form>
     </Modal>
@@ -125,8 +131,8 @@ const TestModal = (props: TestModalProps) => {
   const [visible, setVisible] = useState(false);
 
   const onCreate = values => {
-    console.log('Received values of form: ', values);
-    this.props.postTeam(values)
+    // console.log('Received values of form: ', values);
+    props.postTeam(values)
     setVisible(false);
   };
 

@@ -56,6 +56,7 @@ db
 // COMPLETE!!
 // adds new team to db
 router.post('/api/teams/team', (req, res, next) =>
+// console.log(req.body)
     db
         .addTeam(req.body)
         .then(team => res.send(team))

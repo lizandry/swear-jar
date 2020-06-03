@@ -22,20 +22,20 @@ const UserDashboard = (props: Props) => {
 
     return(
         <div>
-            {/* <TestModal
+            <TestModal
                 user={user}
                 postTeam={props.postTeam}
 
-            /> */}
+            />
 
-        <CreateTeamModal
+        {/* <CreateTeamModal
             user={user}
             postTeam={props.postTeam}
         />
             <CreateTeamForm
                 user={user}
                 postTeam={props.postTeam}
-            />
+            /> */}
 
 
 

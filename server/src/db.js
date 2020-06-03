@@ -123,9 +123,9 @@ class Database {
                 teams(swear, team_name, pledge_url, end_date, owner)
                 VALUES($1, $2, $3, $4, $5)
                 `, [params.swear, 
-                    params.team_name, 
-                    params.pledge_url, 
-                    params.end_date, 
+                    params.team, 
+                    params.pledge, 
+                    params.endDate, 
                     params.owner]
                 );
             }
@@ -150,9 +150,9 @@ class Database {
         
         }
         
-        userLogin(email, password, callback) {
+        // userLogin(email, password, callback) {
         
-        }
+        // }
         userLogout() {
         
         }

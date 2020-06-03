@@ -13,7 +13,7 @@ export interface Team {
     pledge_url?: string;
     end_date?: string;
     // owner?: number;
-    owner: User['id']
+    owner?: User['id']
 }
 export interface Teammate {
     team_id: number;
