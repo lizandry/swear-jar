@@ -85,7 +85,11 @@ export function postSwear(user_id: number, team_id: number) {
           `oops!! fetch('/api/users/${user_id}/${team_id}') failed: Express server responded with HTTP ${resp.status} ${resp.statusText}`
         );
       }
-    });
+    }).then(respData => {
+      console.log('returned "postSwear" data', respData.temp_total_swears)
+      return respData.temp_total_swears
+      
+    })
   }
 
 // COMPLETE!!
