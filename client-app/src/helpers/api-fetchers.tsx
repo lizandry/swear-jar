@@ -66,7 +66,7 @@ export function getTeams(params: number[]) {
   }
 
 //   COMPLETE!!
-// REFACTOR these params come out as '.user' and '.team' in index.js
+// REFACTOR TODO this returns an updated swear count. make it re-render the table row
 export function postSwear(user_id: number, team_id: number) {
     return fetch(`/api/users/${user_id}/${team_id}`, {
         method: 'POST',

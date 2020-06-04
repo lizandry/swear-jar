@@ -1,5 +1,5 @@
 import * as React from 'react';
-import UserDashboard from './Components/UserDashboard';
+import UserDashboard from './components/UserDashboard';
 import { fetchUser, getTeams, getTeam, postSwear, postTeam } from './helpers/api-fetchers';
 import {AppState, Team, User, Teammate} from './interfaces'
 import 'antd/dist/antd.css';

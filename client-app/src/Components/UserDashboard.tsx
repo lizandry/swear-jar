@@ -28,7 +28,7 @@ const UserDashboard = (props: Props) => {
             />
 
 
-            {/* {teams.map(team => {
+            {teams.map(team => {
                 return <TeamTable 
                     key={team.id}
                     team={team}
@@ -36,7 +36,7 @@ const UserDashboard = (props: Props) => {
                     getTeam={props.getTeam}
                     postSwear={props.postSwear}
                 />
-            })} */}
+            })}
         </div>
     )
 }

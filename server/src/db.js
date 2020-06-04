@@ -132,11 +132,12 @@ class Database {
 
     // COMPLETE!!
         addSwearToUser(params) {
-            return this.db.none(
+            return this.db.one(
                 `UPDATE users_to_teams ut
                 SET temp_total_swears = temp_total_swears + 1
                 WHERE user_id = $1
                 AND team_id = $2
+                RETURNING temp_total_swears
                 `, params
                 )
 

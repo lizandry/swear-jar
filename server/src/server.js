@@ -32,18 +32,20 @@ const config = {
   issuerBaseURL: process.env.AUTH0_DOMAIN
 };
 
+// REFACTOR i don't want user auth on the server. but the code isn't hurting anyone, it's just not very clean
 app.use(auth(config)); 
 app.use('/', router);
+app.use('/', (req, res) => {
+    res.send(req.isAuthenticated() ? 'Logged in' : 'Logged out');
+  });
+
+
 https.createServer({key, cert}, app)
 .listen(port, () => {
     console.log(`Listening on ${config.baseURL}`);
 });
 
 
-// TODO figure out what i was trying to do with this this and auth0
-// app.use('/', (req, res) => {
-//     res.send(req.isAuthenticated() ? 'Logged in' : 'Logged out');
-//   });
 
 // app.use(function (req, res, next) {
 //     res.locals.user = req.openid.user;

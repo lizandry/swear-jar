@@ -39,7 +39,8 @@ router.get('/api/users/:user', (req, res, next) =>
 router.post('/api/users/:user/:team', (req, res, next) =>
     db
         .addSwearToUser([req.params.user, req.params.team])
-        .then(res.status(204).send('nice'))
+        // .then(swears=>console.log('swears', swears))
+        .then(swearCount=>res.send(swearCount))
         .catch(next)
 );
 
