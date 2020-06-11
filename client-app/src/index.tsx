@@ -40,7 +40,7 @@ if (process.env.NODE_ENV !== 'production') {
       // client_id={`${process.env.AUTH0_CLIENT_ID}`}
       // redirect_uri={window.location.origin}
       auth0Options={
-        {domain=`${process.env.AUTH0_DOMAIN}`, client_id: `${process.env.AUTH0_CLIENT_ID}`}
+        {"domain": "lizalexandry.auth0.com", "client_id": `${process.env.AUTH0_CLIENT_ID}`, "redirect_uri":`${window.location.origin}`}
   // [domain: `${process.env.AUTH0_DOMAIN}`, client_id: `${process.env.AUTH0_CLIENT_ID}`, redirect_uri={window.location.origin}]
       }
       onRedirectCallback={onRedirectCallback}
