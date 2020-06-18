@@ -4,6 +4,8 @@ import createAuth0Client, {Auth0ClientOptions} from "@auth0/auth0-spa-js";
 
 interface Auth0ProviderProps {
   children: JSX.Element;
+  // domain: string; // domain and client_id are my adds
+  // client_id: string;
   auth0Options: Auth0ClientOptions;
   onRedirectCallback: Function;
 }
@@ -42,6 +44,8 @@ export const Auth0Context = React.createContext(defaultAuth0Context);
 export const useAuth0 = () => useContext(Auth0Context);
 export const Auth0Provider: FC<Auth0ProviderProps> = ({
   children,
+  // domain,
+  // client_id,
   onRedirectCallback = DEFAULT_REDIRECT_CALLBACK,
   auth0Options
 }: Auth0ProviderProps) => {

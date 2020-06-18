@@ -23,10 +23,13 @@ const onRedirectCallback = appState => {
 };
 
 let domainString: string = `${process.env.AUTH0_DOMAIN}`
-let clientString: string = `${}`
+let clientString: string = `${process.env.AUTH0_CLIENT_ID}`
 
 if (process.env.NODE_ENV !== 'production') {
   
+
+
+  // [domain: `${process.env.AUTH0_DOMAIN}`, client_id: `${process.env.AUTH0_CLIENT_ID}`, redirect_uri={window.location.origin}]
   import('react-axe').then(axe => {
     axe.default(React, ReactDOM, 1000);
     ReactDOM.render(
@@ -34,17 +37,15 @@ if (process.env.NODE_ENV !== 'production') {
 
       // [key: string]
       <Auth0Provider
-      // domain: ,
-      // client_id: ,
-      // domain={`${process.env.AUTH0_DOMAIN}`}
-      // client_id={`${process.env.AUTH0_CLIENT_ID}`}
-      // redirect_uri={window.location.origin}
-      auth0Options={
-        {"domain": "lizalexandry.auth0.com", "client_id": `${process.env.AUTH0_CLIENT_ID}`, "redirect_uri":`${window.location.origin}`}
-  // [domain: `${process.env.AUTH0_DOMAIN}`, client_id: `${process.env.AUTH0_CLIENT_ID}`, redirect_uri={window.location.origin}]
-      }
-      onRedirectCallback={onRedirectCallback}
-    >
+        // domain={`${process.env.AUTH0_DOMAIN}`}
+        // client_id={`${process.env.AUTH0_CLIENT_ID}`}
+        auth0Options={
+          {"domain": "lizalexandry.auth0.com", 
+          "client_id": `${process.env.AUTH0_CLIENT_ID}`, 
+          "redirect_uri":`${window.location.origin}`}
+        }
+        onRedirectCallback={onRedirectCallback}
+      >
       <App />
     </Auth0Provider>, 
 
