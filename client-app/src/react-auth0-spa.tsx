@@ -1,12 +1,10 @@
+// typescript translation provided by https://gist.github.com/romixch/05728f0adc600d442d6ec38876452d56
+
 import React, { useState, useEffect, useContext, FC } from "react";
 import createAuth0Client, {Auth0ClientOptions} from "@auth0/auth0-spa-js";
-// import Auth0ClientOptions from '@auth0/auth0-spa-js/dist/typings/'
 
 interface Auth0ProviderProps {
   children: JSX.Element;
-  // domain: string; // domain and client_id are my adds
-  // client_id: string;
-  // redirect_uri: string;
   auth0Options: Auth0ClientOptions;
   onRedirectCallback: Function;
 }
@@ -45,9 +43,6 @@ export const Auth0Context = React.createContext(defaultAuth0Context);
 export const useAuth0 = () => useContext(Auth0Context);
 export const Auth0Provider: FC<Auth0ProviderProps> = ({
   children,
-  // domain,
-  // client_id,
-  // redirect_uri,
   onRedirectCallback = DEFAULT_REDIRECT_CALLBACK,
   auth0Options
 }: Auth0ProviderProps) => {

@@ -19,6 +19,7 @@
     "@types/react-dom": "^16.9.6",
     "antd": "^4.1.4",
     "dotenv": "^8.2.0",
+    "path": "^0.12.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "reactstrap": "^8.4.1",
