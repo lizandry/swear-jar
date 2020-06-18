@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import dotenv from 'dotenv'
+// require('dotenv').config();
 import "./index.css";
 import App from "./App";
 
@@ -22,8 +23,7 @@ const onRedirectCallback = appState => {
   );
 };
 
-let domainString: string = `${process.env.AUTH0_DOMAIN}`
-let clientString: string = `${process.env.AUTH0_CLIENT_ID}`
+console.log('client id', process.env)
 
 if (process.env.NODE_ENV !== 'production') {
   
@@ -39,6 +39,7 @@ if (process.env.NODE_ENV !== 'production') {
       <Auth0Provider
         // domain={`${process.env.AUTH0_DOMAIN}`}
         // client_id={`${process.env.AUTH0_CLIENT_ID}`}
+        // redirect_uri={`${window.location.origin}`}
         auth0Options={
           {"domain": "lizalexandry.auth0.com", 
           "client_id": `${process.env.AUTH0_CLIENT_ID}`, 

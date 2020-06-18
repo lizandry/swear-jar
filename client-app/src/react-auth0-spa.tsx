@@ -6,6 +6,7 @@ interface Auth0ProviderProps {
   children: JSX.Element;
   // domain: string; // domain and client_id are my adds
   // client_id: string;
+  // redirect_uri: string;
   auth0Options: Auth0ClientOptions;
   onRedirectCallback: Function;
 }
@@ -46,6 +47,7 @@ export const Auth0Provider: FC<Auth0ProviderProps> = ({
   children,
   // domain,
   // client_id,
+  // redirect_uri,
   onRedirectCallback = DEFAULT_REDIRECT_CALLBACK,
   auth0Options
 }: Auth0ProviderProps) => {
