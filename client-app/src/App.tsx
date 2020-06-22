@@ -7,10 +7,7 @@ import 'antd/dist/antd.css';
 
 import { Switch, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-// import Home from './components/Home';
-// import Post from './components/post/Post';
-// import Edit from './components/post/Edit';
-// import Create from './components/post/Create';
+import { useAuth0 } from "./react-auth0-spa";
 
 class App extends React.Component<{}, AppState> {
   constructor(props) {
@@ -18,7 +15,7 @@ class App extends React.Component<{}, AppState> {
 
     this.state = {
       user: {
-          id: 1,
+        id: 1,
       },
       loggedIn: true,
       teams: [],
@@ -43,9 +40,18 @@ class App extends React.Component<{}, AppState> {
   
   render() {
   // {console.log('state check!!', this.state)}
+  const { loading } = useAuth0();
+
+
+  // TODO
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
+
 
     return (
       <div className='App'>
+
         <Navbar />
 
         {/* <div className={'container'}>

@@ -51,10 +51,6 @@ export const Auth0Provider: FC<Auth0ProviderProps> = ({
   const [isAuthenticated, setIsAuthenticated] = useState();
   const [user, setUser] = useState();
 
-  // TODO
-  // this is giving me the problem
-  // initialize this in here instead of in App.tsx?
-  // i think i only have the one domain and ID. but the window.location thing might cause an issue
   const [auth0Client, setAuth0] = useState();
   const [loading, setLoading] = useState(true);
   const [popupOpen, setPopupOpen] = useState(false);
@@ -107,6 +103,7 @@ export const Auth0Provider: FC<Auth0ProviderProps> = ({
     setIsAuthenticated(true);
     setUser(user);
   };
+
   return (
     <Auth0Context.Provider
       value={{

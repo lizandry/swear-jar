@@ -1,21 +1,13 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import dotenv from 'dotenv'
 
-// require('dotenv').config();
 import "./index.css";
 import App from "./App";
 
-// this code is from auth0, found at https://auth0.com/blog/modern-full-stack-development-with-nestjs-react-typescript-and-mongodb-part-2/#Building-the-Frontend-with-React-and-TypeScript
-// import { Auth0Provider } from './contexts/auth0-context';
-import { BrowserRouter } from 'react-router-dom';
-
 import { Auth0Provider } from "./react-auth0-spa";
-// import config from "./auth_config.json";
 import history from "./utils/history";
 
-// A function that routes the user to the right place
-// after login
+// post-login redirect
 const onRedirectCallback = appState => {
   history.push(
     appState && appState.targetUrl
@@ -24,19 +16,11 @@ const onRedirectCallback = appState => {
   );
 };
 
-console.log('window location', window.location)
-
 if (process.env.NODE_ENV !== 'production') {
-  
-
-
-  // [domain: `${process.env.AUTH0_DOMAIN}`, client_id: `${process.env.AUTH0_CLIENT_ID}`, redirect_uri={window.location.origin}]
   import('react-axe').then(axe => {
     axe.default(React, ReactDOM, 1000);
-    ReactDOM.render(
-      
 
-      // [key: string]
+    ReactDOM.render(
       <Auth0Provider
         auth0Options={
           {"domain": "lizalexandry.auth0.com", 
@@ -45,21 +29,25 @@ if (process.env.NODE_ENV !== 'production') {
         }
         onRedirectCallback={onRedirectCallback}
       >
-      <App />
+      <App />,
     </Auth0Provider>, 
 
 document.getElementById('root'));
 });
 
 } else {
-  
   ReactDOM.render(
     
-    <Auth0Provider>
-      <BrowserRouter>
-          <App />
-      </BrowserRouter>
-    </Auth0Provider>, 
+  <Auth0Provider
+    auth0Options={
+      {"domain": "lizalexandry.auth0.com", 
+      "client_id": "9phvbI1esWe8ppEb0hpbgtHF8HgNiEft", 
+      "redirect_uri":`${window.location.origin}`}
+    }
+    onRedirectCallback={onRedirectCallback}
+  >
+    <App />,
+  </Auth0Provider>, 
 
 document.getElementById('root'));
 

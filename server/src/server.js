@@ -36,13 +36,13 @@ const config = {
 app.use(auth(config)); 
 app.use('/', router);
 app.use('/', (req, res) => {
-    res.send(req.isAuthenticated() ? 'Logged in' : 'Logged out');
-  });
+  res.send(req.isAuthenticated() ? 'Logged in' : 'Logged out');
+});
 
 
 https.createServer({key, cert}, app)
 .listen(port, () => {
-    console.log(`Listening on ${config.baseURL}`);
+  console.log(`Listening on ${config.baseURL}`);
 });
 
 

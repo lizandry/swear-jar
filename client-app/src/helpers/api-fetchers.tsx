@@ -18,7 +18,7 @@ export function fetchAllUsers() {
 export function fetchUser(params: number) {
     return fetch(`/api/users/${params}`, {
         headers: {
-            Accept: 'application/json'
+          Accept: 'application/json'
         },
     }).then(resp => {
       if (resp.ok) {
@@ -34,9 +34,9 @@ export function fetchUser(params: number) {
 // COMPLETE!!
 export function getTeam(params: number) {
     return fetch(`/api/teams/${params}`, {
-        headers: {
-            Accept: 'application/json'
-        },
+      headers: {
+        Accept: 'application/json'
+      },
     }).then(resp => {
       if (resp.ok) {
         return resp.json();
@@ -52,7 +52,7 @@ export function getTeam(params: number) {
 export function getTeams(params: number[]) {
     return fetch(`/api/teams?ids=${params}`, {
         headers: {
-            Accept: 'application/json'
+          Accept: 'application/json'
         },
     }).then(resp => {
       if (resp.ok) {
@@ -68,16 +68,16 @@ export function getTeams(params: number[]) {
 //   COMPLETE!!
 // REFACTOR TODO this returns an updated swear count. make it re-render the table row
 export function postSwear(user_id: number, team_id: number) {
-    return fetch(`/api/users/${user_id}/${team_id}`, {
-        method: 'POST',
-        body: JSON.stringify({
-            user_id,
-            team_id
-        }),
-        headers: {
-            Accept: 'application/json'
-        }
-    }).then(resp => {
+  return fetch(`/api/users/${user_id}/${team_id}`, {
+    method: 'POST',
+    body: JSON.stringify({
+      user_id,
+      team_id
+    }),
+    headers: {
+      Accept: 'application/json'
+    }
+  }).then(resp => {
       if (resp.ok) {
         return resp.json();
       } else {
@@ -88,28 +88,27 @@ export function postSwear(user_id: number, team_id: number) {
     }).then(respData => {
       console.log('returned "postSwear" data', respData.temp_total_swears)
       return respData.temp_total_swears
-      
     })
   }
 
 // COMPLETE!!
 export function postTeam(params) {
-    return fetch(`/api/teams/team`, {
-        method: 'POST',
-        body: JSON.stringify(params),
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
-    }).then(resp => {
-            if (resp.ok) {
-                return;
-      } else {
-            throw new Error(
-                `oops!! fetch('/api/teams/') failed: Express server responded with HTTP ${resp.status} ${resp.statusText}`
-            );
-      }
-    });
-  }
+  return fetch(`/api/teams/team`, {
+    method: 'POST',
+    body: JSON.stringify(params),
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  }).then(resp => {
+    if (resp.ok) {
+      return;
+    } else {
+      throw new Error(
+        `oops!! fetch('/api/teams/') failed: Express server responded with HTTP ${resp.status} ${resp.statusText}`
+      );
+    }
+  });
+}
 
   
