@@ -23,6 +23,7 @@ export interface Auth0ContextType {
   logout: Function;
 }
 
+
 const defaultAuth0Context: Auth0ContextType = {
   isAuthenticated: false,
   loading: false,
@@ -36,18 +37,20 @@ const defaultAuth0Context: Auth0ContextType = {
   logout: () => { }
 }
 
+
 const DEFAULT_REDIRECT_CALLBACK = () =>
   window.history.replaceState({}, document.title, window.location.pathname);
 
 export const Auth0Context = React.createContext(defaultAuth0Context);
 export const useAuth0 = () => useContext(Auth0Context);
+
+// the auth0 wrapper component for my app
 export const Auth0Provider: FC<Auth0ProviderProps> = ({
   children,
   onRedirectCallback = DEFAULT_REDIRECT_CALLBACK,
   auth0Options
 }: Auth0ProviderProps) => {
-  // try this
-  // const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
   const [isAuthenticated, setIsAuthenticated] = useState();
   const [user, setUser] = useState();
 

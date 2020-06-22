@@ -7,7 +7,7 @@ import 'antd/dist/antd.css';
 
 import { Switch, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import { useAuth0 } from "./react-auth0-spa";
+// import { useAuth0 } from "./react-auth0-spa";
 
 class App extends React.Component<{}, AppState> {
   constructor(props) {
@@ -40,10 +40,10 @@ class App extends React.Component<{}, AppState> {
   
   render() {
   // {console.log('state check!!', this.state)}
-  const { loading } = useAuth0();
-
-
-  // TODO
+  
+  
+  // IN PROGRESS making this hook work with a class component
+  // const { loading } = useAuth0();
   // if (loading) {
   //   return <div>Loading...</div>;
   // }
@@ -53,15 +53,6 @@ class App extends React.Component<{}, AppState> {
       <div className='App'>
 
         <Navbar />
-
-        {/* <div className={'container'}>
-          <Switch>
-            <Route path={"/"} exact={true} component={Home} />
-            <Route path={"/post/:postId"} component={Post}/>
-            <Route path={"/edit/:postId"} component={Edit}/>
-            <Route path={"/create"} component={Create} />
-          </Switch>
-        </div> */}
 
         <UserDashboard
           teams={this.state.teams}
