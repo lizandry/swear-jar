@@ -11,7 +11,7 @@
     "build": "webpack -p",
     "start": "webpack-dev-server -d --content-base ./public"
   },
-  "proxy": "https://localhost:5000/",
+  "proxy": "http://localhost:5000/",
   "dependencies": {
     "@material-ui/core": "^4.9.13",
     "@types/react": "^16.9.34",
