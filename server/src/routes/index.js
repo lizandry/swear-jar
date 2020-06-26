@@ -1,6 +1,5 @@
 require('dotenv').config()
 const router = require('express').Router();
-const { requiresAuth } = require('express-openid-connect');
 const Database = require('../db')
 const dbName = process.env.DB_NAME || 'swear-jar';
 const db = new Database(dbName);

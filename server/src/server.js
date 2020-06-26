@@ -1,7 +1,5 @@
 require('dotenv').config()
-const dotenv = require('dotenv');
 const express = require('express');
-// const https = require('https');
 const logger = require('morgan');
 const path = require('path');
 const router = require('./routes/index');
